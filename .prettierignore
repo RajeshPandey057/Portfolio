@@ -1,0 +1,16 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+!*.cjs
+src/lib/i18n/*.ts
+docker-data/
+
+# Package Managers
+package-lock.json
+pnpm-lock.yaml
+yarn.lock

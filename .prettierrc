@@ -1,0 +1,16 @@
+{
+	"semi": true,
+	"tabWidth": 2,
+	"useTabs": true,
+	"printWidth": 100,
+	"endOfLine": "lf",
+	"singleQuote": true,
+	"trailingComma": "none",
+	"bracketSpacing": true,
+	"svelteStrictMode":true,
+	"bracketSameLine": true,
+	"tailwindConfig": "./tailwind.config.ts",
+	"tailwindFunctions": ["clsx","cn","twMerge"],
+	"plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
+}
