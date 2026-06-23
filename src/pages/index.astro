@@ -1,50 +1,1251 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import "../styles/global.css";
+import '../styles/global.css';
+
+const navItems = [
+	{ id: 'about', label: 'About' },
+	{ id: 'experience', label: 'Experience' },
+	{ id: 'impact', label: 'Impact' },
+	{ id: 'expertise', label: 'Expertise' },
+	{ id: 'projects', label: 'Projects' },
+	{ id: 'beyond', label: 'Beyond' },
+	{ id: 'contact', label: 'Contact' },
+];
 ---
- 
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
+		<div class="pf-root">
+			<div class="pf-aurora">
+				<div class="pf-aurora-blob pf-aurora-blob-1"></div>
+				<div class="pf-aurora-blob pf-aurora-blob-2"></div>
+				<div class="pf-grid"></div>
+			</div>
+
+			<div id="spotlight" class="pf-spotlight"></div>
+
+			<div class="layout pf-layout">
+				<!-- LEFT STICKY COLUMN -->
+				<aside class="leftcol pf-leftcol">
+					<div>
+						<div class="pf-status">
+							<span class="pf-status-dot"></span>Available for select work
+						</div>
+
+						<div class="pf-portrait-row">
+							<div class="pf-portrait-wrap">
+								<div class="pf-portrait-glow"></div>
+								<div class="pf-portrait"><img src="/portrait.jpg" alt="Rajesh Pandey" /></div>
+							</div>
+							<div>
+								<h1 class="pf-name">Rajesh Pandey</h1>
+								<div id="rotating-role" class="pf-role">Lead Technical Engineer</div>
+							</div>
+						</div>
+
+						<p class="pf-tagline">
+							I build and lead the systems behind healthcare products — cloud architecture,
+							backend services, and the mobile apps that keep platforms running in production.
+						</p>
+
+						<nav class="pf-nav">
+							{
+								navItems.map((item) => (
+									<a href={`#${item.id}`} data-nav={item.id} class="pf-nav-link">
+										<span class="pf-nav-line"></span>
+										{item.label}
+									</a>
+								))
+							}
+						</nav>
+					</div>
+
+					<div class="pf-social">
+						<a href="https://github.com/RajeshPandey057" target="_blank" rel="noopener">GitHub</a>
+						<a href="https://www.linkedin.com/in/rajeshpandey057/" target="_blank" rel="noopener"
+							>LinkedIn</a
+						>
+						<a href="mailto:rajesh-pandey@outlook.in">Email</a>
+					</div>
+				</aside>
+
+				<!-- RIGHT SCROLLING CONTENT -->
+				<main class="pf-main">
+					<section id="metrics" class="reveal pf-metrics">
+						<div>
+							<div class="pf-metric-num" data-target="8" data-suffix="+">0</div>
+							<div class="pf-metric-label">years shipping</div>
+						</div>
+						<div>
+							<div class="pf-metric-num" data-target="3" data-suffix="">0</div>
+							<div class="pf-metric-label">acq. → merger</div>
+						</div>
+						<div>
+							<div class="pf-metric-num" data-target="10" data-suffix="+">0</div>
+							<div class="pf-metric-label">platforms touched</div>
+						</div>
+						<div>
+							<div class="pf-metric-num" data-target="7" data-suffix="+">0</div>
+							<div class="pf-metric-label">integrations wired</div>
+						</div>
+					</section>
+
+					<!-- ABOUT -->
+					<section id="about" class="reveal pf-section">
+						<p class="pf-lead">
+							I lead technical delivery across Allia Health Group's healthcare products, from
+							cloud integration services to the mobile apps and patient platforms people actually
+							use.
+						</p>
+						<p class="pf-body">
+							My path ran through an acquisition and a merger: I helped build Medsi, which was
+							acquired by HelloWellness, where I served as Lead Software Engineer and Architect.
+							HelloWellness then merged into Allia Health Group, where I'm now Lead Technical
+							Engineer. Earlier, I built enterprise systems at TCS — including an accounting
+							application from scratch handling high-volume production workloads.
+						</p>
+						<p class="pf-body">
+							I work across the whole stack — backend, frontend, mobile, DevOps, and product — and
+							I gravitate to the messy parts: migrations, data backfills, billing handovers, and
+							making complex healthcare systems reliable in production. On real-time data I
+							contribute as part of a wider team rather than owning it solo. On the side, I build
+							developer and AI tooling for fun.
+						</p>
+					</section>
+
+					<!-- EXPERIENCE -->
+					<section id="experience" class="pf-section">
+						<h2 class="reveal pf-eyebrow">Experience</h2>
+						<div class="pf-timeline">
+							<div class="reveal pf-role-card pf-role-card-top">
+								<div class="pf-role-date">2025 — Now</div>
+								<div>
+									<h3 class="pf-role-title">Lead Technical Engineer</h3>
+									<div class="pf-role-org">Allia Health Group</div>
+									<p class="pf-role-desc">
+										Lead technical delivery across the healthcare product suite after
+										HelloWellness merged into Allia — patient platform, admin tooling, Brello,
+										and provider workflows. Build cloud integration services and drive
+										cross-team work from requirements to production.
+									</p>
+									<ul class="pf-role-points">
+										<li>
+											Shipped event-driven integration services on Cloud Functions &amp;
+											Pub/Sub, contributing to the real-time data hub alongside the wider team.
+										</li>
+										<li>
+											Drove WooCommerce order/subscription migration and Stripe billing
+											handover with historical backfills and active-order linking.
+										</li>
+										<li>
+											Delivered Brello backend, mobile, and patient-UI features with CI/CD and
+											reliable release workflows.
+										</li>
+									</ul>
+									<div class="pf-tags">
+										<span class="pf-tag">Cloud Functions</span>
+										<span class="pf-tag">Pub/Sub</span>
+										<span class="pf-tag">Stripe</span>
+										<span class="pf-tag">Elasticsearch</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="reveal pf-role-card">
+								<div class="pf-role-date">2024 — 2025</div>
+								<div>
+									<h3 class="pf-role-title">Lead Software Engineer &amp; Architect</h3>
+									<div class="pf-role-org">HelloWellness</div>
+									<p class="pf-role-desc">
+										Joined full-time after HelloWellness acquired Medsi. Led architecture and
+										engineering across backend, mobile, and patient-facing systems, and drove
+										the Medsi transition before the merger into Allia Health Group.
+									</p>
+								</div>
+							</div>
+
+							<div class="reveal pf-role-card">
+								<div class="pf-role-date">Earlier</div>
+								<div>
+									<h3 class="pf-role-title">Lead Engineer &amp; Co-builder</h3>
+									<div class="pf-role-org">
+										Medsi <span class="pf-role-org-note">— acquired by HelloWellness</span>
+									</div>
+									<p class="pf-role-desc">
+										Helped build the Medsi healthcare product as a core engineer, leading to its
+										acquisition by HelloWellness.
+									</p>
+								</div>
+							</div>
+
+							<div class="reveal pf-role-card pf-role-card-bottom">
+								<div class="pf-role-date">Foundation</div>
+								<div>
+									<h3 class="pf-role-title">Software Engineer</h3>
+									<div class="pf-role-org">Tata Consultancy Services</div>
+									<p class="pf-role-desc">
+										Built an enterprise accounting application from scratch handling
+										high-volume production workloads. Recognized through TCS Wings 1. Where I
+										learned to ship reliable systems at scale.
+									</p>
+								</div>
+							</div>
+						</div>
+						<a
+							href="https://www.linkedin.com/in/rajeshpandey057/"
+							target="_blank"
+							rel="noopener"
+							class="pf-resume-link"
+						>
+							View full résumé <span class="pf-arrow">↗</span>
+						</a>
+					</section>
+
+					<!-- IMPACT -->
+					<section id="impact" class="pf-section">
+						<h2 class="reveal pf-eyebrow">Selected impact</h2>
+						<p class="reveal pf-impact-intro">
+							A few problems I've owned end-to-end — the kind of work that doesn't show up on a
+							screenshot but keeps healthcare products alive in production.
+						</p>
+						<div class="pf-cases">
+							<div class="reveal casecard pf-case">
+								<div class="pf-case-head">
+									<h3>Zero-downtime commerce migration</h3>
+									<span class="pf-case-tag">Allia / Brello</span>
+								</div>
+								<p class="pf-case-desc">
+									Migrated live WooCommerce orders and subscriptions onto Stripe billing —
+									historical backfills, active-order linking, and a careful handover so patients
+									never saw an interruption to their medication subscriptions.
+								</p>
+								<div class="pf-case-stats">
+									<div>
+										<div class="pf-case-stat">WooCommerce → Stripe</div>
+										<div class="pf-case-stat-label">billing handover</div>
+									</div>
+									<div>
+										<div class="pf-case-stat">Backfill + link</div>
+										<div class="pf-case-stat-label">active orders preserved</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="reveal casecard pf-case">
+								<div class="pf-case-head">
+									<h3>Event-driven integration backbone</h3>
+									<span class="pf-case-tag">RT data hub · team effort</span>
+								</div>
+								<p class="pf-case-desc">
+									Contributed Cloud Functions and Pub/Sub consumer pipelines that wire
+									WooCommerce, Stripe, TelegraMD, MD Integrations, LifeFile, EasyPost, and
+									Intercom into clean master-object and distribution workflows — built and
+									operated alongside the wider data team.
+								</p>
+								<div class="pf-case-stats">
+									<div>
+										<div class="pf-case-stat">7+</div>
+										<div class="pf-case-stat-label">systems integrated</div>
+									</div>
+									<div>
+										<div class="pf-case-stat">Event-driven</div>
+										<div class="pf-case-stat-label">webhooks + consumers</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="reveal casecard pf-case">
+								<div class="pf-case-head">
+									<h3>Brello app &amp; backend reliability</h3>
+									<span class="pf-case-tag">Mobile + backend</span>
+								</div>
+								<p class="pf-case-desc">
+									Shipped subscription handling, medication reminders, OneSignal device
+									registration, and tenant branding across the Brello mobile app and backend —
+									backed by CI/CD and release workflows that hold up under production load.
+								</p>
+								<div class="pf-case-stats">
+									<div>
+										<div class="pf-case-stat">Mobile + API</div>
+										<div class="pf-case-stat-label">full feature delivery</div>
+									</div>
+									<div>
+										<div class="pf-case-stat">CI/CD</div>
+										<div class="pf-case-stat-label">reliable releases</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- EXPERTISE -->
+					<section id="expertise" class="pf-section">
+						<h2 class="reveal pf-eyebrow">Expertise</h2>
+						<div class="reveal twocol pf-expertise-grid">
+							<div class="pf-expertise-cell">
+								<div class="pf-expertise-num">01</div>
+								<h3>Cloud &amp; integrations</h3>
+								<p>
+									Event-driven services on Cloud Functions, Pub/Sub, Cloud Run, Secret Manager
+									and Elasticsearch — REST APIs, webhook receivers, and downstream consumers
+									connecting third-party systems.
+								</p>
+							</div>
+							<div class="pf-expertise-cell">
+								<div class="pf-expertise-num">02</div>
+								<h3>Platform &amp; migrations</h3>
+								<p>
+									WooCommerce order/subscription migration, Stripe billing handovers, historical
+									backfills, and active-order linking — moving live healthcare commerce without
+									dropping a beat.
+								</p>
+							</div>
+							<div class="pf-expertise-cell">
+								<div class="pf-expertise-num">03</div>
+								<h3>Mobile &amp; backend product</h3>
+								<p>
+									React Native and Node.js product work: subscriptions, reminders, push
+									registration, tenant branding, plus the CI/CD and release discipline to ship
+									it safely.
+								</p>
+							</div>
+							<div class="pf-expertise-cell">
+								<div class="pf-expertise-num">04</div>
+								<h3>Technical leadership</h3>
+								<p>
+									Leading delivery across backend, frontend, mobile, DevOps, QA and product —
+									turning fuzzy requirements into shipped, reliable healthcare systems.
+								</p>
+							</div>
+						</div>
+
+						<div class="reveal pf-stack">
+							<span class="pf-stack-pill">TypeScript</span>
+							<span class="pf-stack-pill">Node.js</span>
+							<span class="pf-stack-pill">React Native</span>
+							<span class="pf-stack-pill">Google Cloud</span>
+							<span class="pf-stack-pill">Cloud Run</span>
+							<span class="pf-stack-pill">Pub/Sub</span>
+							<span class="pf-stack-pill">Elasticsearch</span>
+							<span class="pf-stack-pill">REST APIs</span>
+							<span class="pf-stack-pill">Stripe</span>
+							<span class="pf-stack-pill">CI/CD</span>
+							<span class="pf-stack-pill">DevOps</span>
+						</div>
+					</section>
+
+					<!-- PROJECTS -->
+					<section id="projects" class="pf-section">
+						<h2 class="reveal pf-eyebrow">Side projects</h2>
+						<div class="reveal pf-projects">
+							<a
+								class="proj pf-project"
+								href="https://github.com/RajeshPandey057"
+								target="_blank"
+								rel="noopener"
+							>
+								<div>
+									<h3>Polygram</h3>
+									<p>
+										AI-agent tooling built as an individual contributor with friends —
+										exploring developer ergonomics around autonomous agents.
+									</p>
+									<div class="pf-project-meta">AI agents · tooling · TypeScript</div>
+								</div>
+								<span class="pf-arrow">↗</span>
+							</a>
+							<a
+								class="proj pf-project"
+								href="https://github.com/RajeshPandey057"
+								target="_blank"
+								rel="noopener"
+							>
+								<div>
+									<h3>Image Converter</h3>
+									<p>
+										A clean, fast utility for converting images between formats — a focused
+										tool that does one thing well.
+									</p>
+									<div class="pf-project-meta">web · utility</div>
+								</div>
+								<span class="pf-arrow">↗</span>
+							</a>
+							<div class="proj pf-project pf-project-static">
+								<div>
+									<h3>Power Load Forecasting</h3>
+									<p>
+										Dynamic load forecasting system — led at the Adani hackathon, applying data
+										modeling to real grid-demand problems.
+									</p>
+									<div class="pf-project-meta">data · forecasting · hackathon lead</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- BEYOND -->
+					<section id="beyond" class="pf-section">
+						<h2 class="reveal pf-eyebrow">Beyond engineering</h2>
+						<div class="reveal twocol pf-beyond-grid">
+							<div class="pf-beyond-card">
+								<h3>Leadership &amp; service</h3>
+								<ul>
+									<li>
+										NCC Alpha grade · Group Commander's Certificate · represented Gujarat · OTA
+										screening.
+									</li>
+									<li>
+										Led TPC and Know-How initiatives, building registration tooling that
+										handled 2,500+ sign-ups.
+									</li>
+								</ul>
+							</div>
+							<div class="pf-beyond-card">
+								<h3>Recognition &amp; building</h3>
+								<ul>
+									<li>TCS Wings 1 recognition for early production impact.</li>
+									<li>Led the Adani hackathon team on dynamic power-load forecasting.</li>
+									<li>Builds developer &amp; AI tooling on the side, for the joy of it.</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<!-- CONTACT -->
+					<section id="contact" class="reveal pf-section pf-contact">
+						<h2 class="pf-eyebrow pf-eyebrow-accent">Contact</h2>
+						<h3 class="pf-contact-heading">Let's build something reliable.</h3>
+						<div class="pf-contact-actions">
+							<a href="mailto:rajesh-pandey@outlook.in" class="pf-contact-cta">
+								<span class="pf-contact-cta-border"></span>
+								<span class="pf-contact-cta-label">rajesh-pandey@outlook.in</span>
+							</a>
+							<a
+								href="https://www.linkedin.com/in/rajeshpandey057/"
+								target="_blank"
+								rel="noopener"
+								class="pf-contact-link">LinkedIn ↗</a
+							>
+							<a
+								href="https://github.com/RajeshPandey057"
+								target="_blank"
+								rel="noopener"
+								class="pf-contact-link">GitHub ↗</a
+							>
+						</div>
+						<div class="pf-footer-note">© 2026 Rajesh Pandey · Surat, Gujarat, India</div>
+					</section>
+				</main>
+			</div>
+		</div>
+
+		<script>
+			const ids = ['about', 'experience', 'impact', 'expertise', 'projects', 'beyond', 'contact'];
+			const sections = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+			const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.pf-nav-link'));
+			const scroller = document.querySelector<HTMLElement>('.pf-main');
+
+			function setActive(id: string) {
+				navLinks.forEach((link) => {
+					const isActive = link.dataset.nav === id;
+					link.classList.toggle('is-active', isActive);
+				});
+			}
+
+			let activeId = 'about';
+			function onScroll() {
+				const mid = window.innerHeight * 0.35;
+				let current = activeId;
+				for (const section of sections) {
+					if (section.getBoundingClientRect().top <= mid) current = section.id;
+				}
+				if (current !== activeId) {
+					activeId = current;
+					setActive(current);
+				}
+			}
+			(scroller ?? window).addEventListener('scroll', onScroll, { passive: true });
+			onScroll();
+			setActive(activeId);
+
+			navLinks.forEach((link) => {
+				link.addEventListener('click', (e) => {
+					e.preventDefault();
+					const id = link.dataset.nav;
+					const el = id ? document.getElementById(id) : null;
+					if (el && scroller) {
+						scroller.scrollTo({
+							top: el.offsetTop - 30,
+							behavior: 'smooth',
+						});
+					}
+				});
+			});
+
+			const spot = document.getElementById('spotlight');
+			window.addEventListener(
+				'mousemove',
+				(e) => {
+					if (spot) {
+						spot.style.background = `radial-gradient(560px circle at ${e.clientX}px ${e.clientY}px, rgba(226,98,47,0.10), transparent 65%)`;
+					}
+				},
+				{ passive: true },
+			);
+
+			let counted = false;
+			function runCounters() {
+				if (counted) return;
+				counted = true;
+				const metrics = Array.from(document.querySelectorAll<HTMLElement>('.pf-metric-num'));
+				const dur = 1100;
+				const start = Date.now();
+				const timer = setInterval(() => {
+					const p = Math.min(1, (Date.now() - start) / dur);
+					const eased = 1 - Math.pow(1 - p, 3);
+					metrics.forEach((el) => {
+						const target = Number(el.dataset.target ?? '0');
+						const suffix = el.dataset.suffix ?? '';
+						const value = Math.round(target * eased);
+						el.textContent = p >= 1 ? `${value}${suffix}` : `${value}`;
+					});
+					if (p >= 1) clearInterval(timer);
+				}, 40);
+			}
+			setTimeout(runCounters, 350);
+
+			const roles = [
+				'Lead Technical Engineer',
+				'HealthTech Platforms',
+				'Cloud Architecture',
+				'Mobile & Backend',
+				'AI Developer Tools',
+			];
+			const roleEl = document.getElementById('rotating-role');
+			let roleIdx = 0;
+			setInterval(() => {
+				roleIdx = (roleIdx + 1) % roles.length;
+				if (roleEl) roleEl.textContent = roles[roleIdx];
+			}, 2400);
+		</script>
+
+		<style>
+			:global(*) {
+				box-sizing: border-box;
+			}
+			:global(html) {
+				scroll-behavior: smooth;
+			}
+			:global(body) {
+				margin: 0;
+				padding: 0;
+			}
+			:global(::selection) {
+				background: #e2622f;
+				color: #100d0a;
+			}
+
+			@keyframes auroraDrift {
+				0%,
+				100% {
+					transform: translate(-10%, -8%) scale(1);
+				}
+				50% {
+					transform: translate(12%, 10%) scale(1.25);
+				}
+			}
+			@keyframes auroraDrift2 {
+				0%,
+				100% {
+					transform: translate(8%, 6%) scale(1.1);
+				}
+				50% {
+					transform: translate(-14%, -10%) scale(0.85);
+				}
+			}
+			@keyframes gridFloat {
+				from {
+					background-position: 0 0;
+				}
+				to {
+					background-position: 0 -800px;
+				}
+			}
+			@keyframes borderSpin {
+				to {
+					transform: rotate(360deg);
+				}
+			}
+			@keyframes revealUp {
+				from {
+					transform: translateY(22px);
+				}
+				to {
+					transform: none;
+				}
+			}
+
+			.pf-root {
+				background: #100d0a;
+				color: #ece6d9;
+				font-family: 'Inter', sans-serif;
+				-webkit-font-smoothing: antialiased;
+				position: relative;
+			}
+
+			.pf-aurora {
+				position: fixed;
+				inset: 0;
+				z-index: 0;
+				pointer-events: none;
+				overflow: hidden;
+			}
+			.pf-aurora-blob {
+				position: absolute;
+				border-radius: 50%;
+			}
+			.pf-aurora-blob-1 {
+				top: -10%;
+				left: -5%;
+				width: 55vw;
+				height: 55vw;
+				background: radial-gradient(circle, rgba(226, 98, 47, 0.16), transparent 60%);
+				filter: blur(40px);
+				animation: auroraDrift 22s ease-in-out infinite;
+			}
+			.pf-aurora-blob-2 {
+				bottom: -15%;
+				right: -10%;
+				width: 50vw;
+				height: 50vw;
+				background: radial-gradient(circle, rgba(120, 90, 200, 0.12), transparent 62%);
+				filter: blur(50px);
+				animation: auroraDrift2 28s ease-in-out infinite;
+			}
+			.pf-grid {
+				position: absolute;
+				inset: 0;
+				background-image: linear-gradient(rgba(236, 230, 217, 0.025) 1px, transparent 1px),
+					linear-gradient(90deg, rgba(236, 230, 217, 0.025) 1px, transparent 1px);
+				background-size: 48px 48px;
+				animation: gridFloat 40s linear infinite;
+				mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 80%);
+				-webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 80%);
+			}
+
+			.pf-spotlight {
+				position: fixed;
+				inset: 0;
+				z-index: 1;
+				pointer-events: none;
+				transition: background 0.12s ease;
+				background: radial-gradient(600px circle at 50% 0%, rgba(226, 98, 47, 0.07), transparent 70%);
+			}
+
+			.pf-layout {
+				position: relative;
+				z-index: 2;
+				max-width: 1180px;
+				margin: 0 auto;
+				padding: 0 40px;
+				display: grid;
+				grid-template-columns: 0.88fr 1.12fr;
+				gap: 64px;
+				height: 100vh;
+			}
+
+			.pf-leftcol {
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				gap: 48px;
+				padding: 72px 0 56px;
+			}
+
+			.pf-main {
+				height: 100vh;
+				overflow-y: auto;
+				scrollbar-width: none;
+			}
+			.pf-main::-webkit-scrollbar {
+				display: none;
+			}
+
+			.pf-status {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 12px;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: #e2622f;
+				margin-bottom: 22px;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+			.pf-status-dot {
+				width: 7px;
+				height: 7px;
+				border-radius: 50%;
+				background: #3fbf6f;
+				box-shadow: 0 0 10px #3fbf6f;
+			}
+
+			.pf-portrait-row {
+				display: flex;
+				align-items: center;
+				gap: 18px;
+				margin-bottom: 22px;
+			}
+			.pf-portrait-wrap {
+				position: relative;
+				width: 84px;
+				height: 84px;
+				flex: none;
+			}
+			.pf-portrait-glow {
+				position: absolute;
+				inset: -6px;
+				border-radius: 50%;
+				background: radial-gradient(circle, rgba(226, 98, 47, 0.45), transparent 70%);
+				filter: blur(10px);
+			}
+			.pf-portrait {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				overflow: hidden;
+				border: 1px solid rgba(226, 98, 47, 0.35);
+				background: #1c1812;
+			}
+			.pf-portrait img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				filter: grayscale(1) contrast(1.1) brightness(1.03);
+			}
+
+			.pf-name {
+				font-family: 'Newsreader', serif;
+				font-weight: 500;
+				font-size: 34px;
+				line-height: 1;
+				letter-spacing: -0.02em;
+				color: #f6f1e6;
+				margin: 0;
+			}
+			.pf-role {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 12.5px;
+				color: #e2622f;
+				margin-top: 7px;
+				height: 18px;
+			}
+
+			.pf-tagline {
+				font-family: 'Newsreader', serif;
+				font-size: 19px;
+				line-height: 1.45;
+				color: #b9b1a1;
+				max-width: 34ch;
+				margin: 0;
+			}
+
+			.pf-nav {
+				margin-top: 36px;
+				display: flex;
+				flex-direction: column;
+				gap: 3px;
+			}
+			.pf-nav-link {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 12px;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: #8a8275;
+				padding: 5px 0;
+				display: flex;
+				align-items: center;
+				gap: 14px;
+				text-decoration: none;
+			}
+			.pf-nav-link.is-active {
+				color: #f6f1e6;
+			}
+			.pf-nav-line {
+				height: 1px;
+				width: 20px;
+				background: #8a8275;
+				transition: all 0.25s;
+			}
+			.pf-nav-link.is-active .pf-nav-line {
+				width: 40px;
+				background: #f6f1e6;
+			}
+
+			.pf-social {
+				display: flex;
+				gap: 22px;
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 12px;
+			}
+			.pf-social a {
+				color: #8a8275;
+				text-decoration: none;
+			}
+			.pf-social a:hover {
+				color: #e2622f;
+			}
+
+			.pf-main {
+				padding: 88px 0 72px;
+			}
+
+			.pf-metrics {
+				display: flex;
+				gap: 36px;
+				flex-wrap: wrap;
+				padding-bottom: 52px;
+				border-bottom: 1px solid rgba(236, 230, 217, 0.1);
+			}
+			.pf-metric-num {
+				font-family: 'Newsreader', serif;
+				font-size: 46px;
+				line-height: 1;
+				color: #e2622f;
+			}
+			.pf-metric-label {
+				font-size: 12px;
+				color: #8a8275;
+				margin-top: 8px;
+				font-family: 'JetBrains Mono', monospace;
+			}
+
+			.pf-section {
+				padding: 44px 0;
+				scroll-margin-top: 40px;
+			}
+			#about {
+				padding: 60px 0;
+			}
+
+			.pf-lead {
+				font-family: 'Newsreader', serif;
+				font-size: 23px;
+				line-height: 1.55;
+				color: #f0eadd;
+				margin: 0;
+			}
+			.pf-body {
+				font-size: 15.5px;
+				line-height: 1.7;
+				color: #a9a192;
+				margin-top: 22px;
+			}
+			#about .pf-body + .pf-body {
+				margin-top: 16px;
+			}
+
+			.pf-eyebrow {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 12.5px;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: #8a8275;
+				margin: 0 0 26px;
+			}
+			.pf-eyebrow-accent {
+				color: #e2622f;
+				margin-bottom: 20px;
+			}
+
+			.pf-timeline {
+				display: flex;
+				flex-direction: column;
+			}
+			.pf-role-card {
+				display: grid;
+				grid-template-columns: 120px 1fr;
+				gap: 20px;
+				padding: 24px 0;
+				border-top: 1px solid rgba(236, 230, 217, 0.12);
+			}
+			.pf-role-card-bottom {
+				border-bottom: 1px solid rgba(236, 230, 217, 0.12);
+			}
+			.pf-role-date {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 12px;
+				color: #8a8275;
+				padding-top: 5px;
+			}
+			.pf-role-title {
+				font-size: 18.5px;
+				font-weight: 600;
+				color: #f6f1e6;
+				margin: 0;
+			}
+			.pf-role-org {
+				font-size: 14px;
+				color: #e2622f;
+				margin-top: 2px;
+			}
+			.pf-role-org-note {
+				color: #8a8275;
+			}
+			.pf-role-desc {
+				font-size: 14.5px;
+				line-height: 1.65;
+				color: #a9a192;
+				margin-top: 10px;
+				margin-bottom: 0;
+			}
+			.pf-role-points {
+				list-style: none;
+				margin: 12px 0 0;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 7px;
+			}
+			.pf-role-points li {
+				font-size: 13.5px;
+				color: #b6ad9e;
+				padding-left: 18px;
+				position: relative;
+				line-height: 1.55;
+			}
+			.pf-role-points li::before {
+				content: '▸';
+				position: absolute;
+				left: 0;
+				color: #e2622f;
+			}
+			.pf-tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 7px;
+				margin-top: 14px;
+			}
+			.pf-tag {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 11px;
+				color: #f0a07a;
+				background: rgba(226, 98, 47, 0.14);
+				border-radius: 2px;
+				padding: 4px 9px;
+			}
+			.pf-resume-link {
+				display: inline-flex;
+				align-items: center;
+				gap: 8px;
+				margin-top: 24px;
+				font-size: 14px;
+				font-weight: 500;
+				color: #f6f1e6;
+				text-decoration: none;
+			}
+			.pf-resume-link:hover {
+				color: #e2622f;
+			}
+			.pf-arrow {
+				color: #e2622f;
+			}
+
+			.pf-impact-intro {
+				font-size: 15px;
+				color: #a9a192;
+				margin-bottom: 26px;
+				max-width: 56ch;
+			}
+			.pf-cases {
+				display: flex;
+				flex-direction: column;
+				gap: 14px;
+			}
+			.pf-case {
+				border: 1px solid rgba(236, 230, 217, 0.12);
+				border-radius: 4px;
+				padding: 26px 28px;
+				background: rgba(236, 230, 217, 0.015);
+				transition: border-color 0.25s;
+			}
+			.pf-case:hover {
+				border-color: rgba(226, 98, 47, 0.5);
+			}
+			.pf-case-head {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 16px;
+				flex-wrap: wrap;
+			}
+			.pf-case-head h3 {
+				font-size: 18px;
+				font-weight: 600;
+				color: #f6f1e6;
+				margin: 0;
+			}
+			.pf-case-tag {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 11px;
+				color: #8a8275;
+			}
+			.pf-case-desc {
+				font-size: 14px;
+				line-height: 1.65;
+				color: #a9a192;
+				margin-top: 10px;
+				margin-bottom: 0;
+			}
+			.pf-case-stats {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 24px;
+				margin-top: 16px;
+				font-family: 'JetBrains Mono', monospace;
+			}
+			.pf-case-stat {
+				font-size: 20px;
+				color: #e2622f;
+			}
+			.pf-case-stat-label {
+				font-size: 11px;
+				color: #8a8275;
+				margin-top: 3px;
+			}
+
+			.pf-expertise-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 2px;
+				background: rgba(236, 230, 217, 0.1);
+				border: 1px solid rgba(236, 230, 217, 0.1);
+			}
+			.pf-expertise-cell {
+				background: #13100c;
+				padding: 26px 24px 30px;
+			}
+			.pf-expertise-num {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 11.5px;
+				color: #e2622f;
+				margin-bottom: 12px;
+			}
+			.pf-expertise-cell h3 {
+				font-size: 17px;
+				font-weight: 600;
+				margin: 0 0 8px;
+				color: #f6f1e6;
+			}
+			.pf-expertise-cell p {
+				font-size: 13.5px;
+				line-height: 1.6;
+				color: #a9a192;
+				margin: 0;
+			}
+
+			.pf-stack {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 9px;
+				margin-top: 24px;
+			}
+			.pf-stack-pill {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 12px;
+				border: 1px solid rgba(236, 230, 217, 0.18);
+				border-radius: 2px;
+				padding: 7px 12px;
+				color: #c7bfb0;
+			}
+
+			.pf-projects {
+				display: flex;
+				flex-direction: column;
+				gap: 2px;
+				background: rgba(236, 230, 217, 0.1);
+				border: 1px solid rgba(236, 230, 217, 0.1);
+			}
+			.pf-project {
+				background: #13100c;
+				padding: 24px 26px;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				gap: 24px;
+				transition: transform 0.25s, background 0.25s;
+				text-decoration: none;
+				color: inherit;
+			}
+			.pf-project:hover {
+				transform: translateY(-3px);
+				background: #1c1812;
+			}
+			.pf-project-static:hover {
+				transform: none;
+			}
+			.pf-project h3 {
+				font-size: 17.5px;
+				font-weight: 600;
+				color: #f6f1e6;
+				margin: 0;
+			}
+			.pf-project p {
+				font-size: 13.5px;
+				line-height: 1.6;
+				color: #a9a192;
+				margin-top: 7px;
+			}
+			.pf-project-meta {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 11px;
+				color: #8a8275;
+				margin-top: 11px;
+			}
+			.pf-project .pf-arrow {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 17px;
+			}
+
+			.pf-beyond-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 14px;
+			}
+			.pf-beyond-card {
+				border: 1px solid rgba(236, 230, 217, 0.12);
+				border-radius: 4px;
+				padding: 22px 24px;
+			}
+			.pf-beyond-card h3 {
+				font-size: 16px;
+				font-weight: 600;
+				color: #f6f1e6;
+				margin: 0;
+			}
+			.pf-beyond-card ul {
+				list-style: none;
+				margin: 12px 0 0;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+			}
+			.pf-beyond-card li {
+				font-size: 13.5px;
+				color: #b6ad9e;
+				padding-left: 18px;
+				position: relative;
+				line-height: 1.55;
+			}
+			.pf-beyond-card li::before {
+				content: '▸';
+				position: absolute;
+				left: 0;
+				color: #e2622f;
+			}
+
+			.pf-contact {
+				padding: 44px 0 88px;
+			}
+			.pf-contact-heading {
+				font-family: 'Newsreader', serif;
+				font-weight: 500;
+				font-size: clamp(30px, 4vw, 46px);
+				line-height: 1.05;
+				letter-spacing: -0.02em;
+				color: #f6f1e6;
+				max-width: 16ch;
+				margin: 0;
+			}
+			.pf-contact-actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 12px;
+				margin-top: 30px;
+				align-items: center;
+			}
+			.pf-contact-cta {
+				position: relative;
+				overflow: hidden;
+				border-radius: 100px;
+				padding: 1.5px;
+				display: inline-block;
+				text-decoration: none;
+			}
+			.pf-contact-cta-border {
+				position: absolute;
+				inset: -150%;
+				background: conic-gradient(
+					from 0deg,
+					transparent 0deg,
+					#e2622f 60deg,
+					#f0a07a 120deg,
+					transparent 180deg
+				);
+				animation: borderSpin 4s linear infinite;
+			}
+			.pf-contact-cta-label {
+				position: relative;
+				display: block;
+				background: #13100c;
+				color: #f6f1e6;
+				padding: 12px 25px;
+				border-radius: 100px;
+				font-size: 14px;
+				font-weight: 600;
+			}
+			.pf-contact-link {
+				border: 1px solid rgba(236, 230, 217, 0.25);
+				padding: 13px 26px;
+				border-radius: 100px;
+				font-size: 14px;
+				font-weight: 500;
+				color: #ece6d9;
+				text-decoration: none;
+			}
+			.pf-contact-link:hover {
+				border-color: #ece6d9;
+			}
+			.pf-footer-note {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 11.5px;
+				color: #6a6458;
+				margin-top: 60px;
+			}
+
+			.reveal {
+				opacity: 1;
+				animation: revealUp 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+			}
+
+			@media (max-width: 900px) {
+				.pf-layout {
+					display: block;
+				}
+				.pf-leftcol {
+					position: static;
+					min-height: auto;
+					padding-bottom: 40px;
+				}
+				.pf-expertise-grid,
+				.pf-beyond-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
 	</body>
 </html>
