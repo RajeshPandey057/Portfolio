@@ -1,0 +1,27 @@
+{
+  "name": "Rajesh Pandey — Lead Technical Engineer",
+  "short_name": "Rajesh Pandey",
+  "description": "Lead Technical Engineer building cloud architecture, backend services, and the mobile apps behind healthcare platforms.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#100d0a",
+  "theme_color": "#100d0a",
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+# robots.txt — rajeshpandey.site
+# Search engines and AI assistants are welcome. This site is meant to be
+# discoverable and citable by both traditional crawlers and LLM-based agents.
+
+User-agent: *
+Allow: /
+
+# --- Search engines ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# --- AI / LLM crawlers (training + retrieval + live browsing) ---
+# Explicitly allowed so this profile can be discovered, summarized, and cited.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Helpful entry points for crawlers and agents.
+Sitemap: https://rajeshpandey.site/sitemap-index.xml

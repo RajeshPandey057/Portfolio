@@ -1,7 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import '../styles/global.css';
+import portrait from '../assets/portrait-square.jpg';
+import { SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
+import { homePageGraph } from '../lib/seo';
+
+const homeTitle = `${SITE_TITLE} — ${SITE_TAGLINE} | Cloud, Backend & Mobile`;
+const schema = homePageGraph(Astro.site);
 
 const navItems = [
 	{ id: 'about', label: 'About' },
@@ -17,12 +22,12 @@ const navItems = [
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
-			rel="stylesheet"
+		<BaseHead
+			title={homeTitle}
+			description={SITE_DESCRIPTION}
+			type="profile"
+			preloadFonts={['--font-newsreader', '--font-inter']}
+			schema={schema}
 		/>
 	</head>
 	<body>
@@ -46,7 +51,16 @@ const navItems = [
 						<div class="pf-portrait-row">
 							<div class="pf-portrait-wrap">
 								<div class="pf-portrait-glow"></div>
-								<div class="pf-portrait"><img src="/portrait.jpg" alt="Rajesh Pandey" /></div>
+								<div class="pf-portrait">
+									<Image
+										src={portrait}
+										alt="Rajesh Pandey, Lead Technical Engineer"
+										width={84}
+										height={84}
+										densities={[2, 3]}
+										loading="eager"
+									/>
+								</div>
 							</div>
 							<div>
 								<h1 class="pf-name">Rajesh Pandey</h1>
@@ -1223,7 +1237,7 @@ const navItems = [
 			.pf-footer-note {
 				font-family: 'JetBrains Mono', monospace;
 				font-size: 11.5px;
-				color: #6a6458;
+				color: #8a8275;
 				margin-top: 60px;
 			}
 
