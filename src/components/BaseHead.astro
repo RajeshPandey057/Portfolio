@@ -1,16 +1,16 @@
 ---
 // Global <head> for every page: canonical, robots, full Open Graph + Twitter,
 // self-hosted font preloads, favicons/manifest, and schema.org JSON-LD.
-import '../styles/global.css';
-import { Font } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { Font } from 'astro:assets';
 import {
-	AUTHOR,
-	OG_IMAGE,
-	SITE_KEYWORDS,
-	SITE_LOCALE,
-	SITE_TITLE,
+AUTHOR,
+OG_IMAGE,
+SITE_KEYWORDS,
+SITE_LOCALE,
+SITE_TITLE,
 } from '../consts';
+import '../styles/global.css';
 
 interface Props {
 	title: string;
@@ -74,6 +74,13 @@ if (!image) {
 	ogAlt = imageAlt ?? title;
 }
 const ogImageURL = new URL(ogSrc, Astro.site).href;
+const ogImageType = /\.png(\?|$)/i.test(ogSrc)
+	? 'image/png'
+	: /\.jpe?g(\?|$)/i.test(ogSrc)
+		? 'image/jpeg'
+		: /\.webp(\?|$)/i.test(ogSrc)
+			? 'image/webp'
+			: undefined;
 
 const robots = noindex
 	? 'noindex, nofollow'
@@ -97,7 +104,7 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 <meta name="color-scheme" content="dark light" />
 
 <!-- Fonts: inject @font-face for all families, preload only this page's critical ones -->
-{fontVars.map((v) => <Font cssVariable={v} preload={preloadFonts.includes(v)} />)}
+{fontVars.map((v) => <Font cssVariable={v as keyof typeof Font} preload={preloadFonts.includes(v)} />)}
 
 <!-- Canonical + feeds + sitemap -->
 <link rel="canonical" href={canonicalURL} />
@@ -126,6 +133,8 @@ const schemaList = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageURL} />
+<meta property="og:image:secure_url" content={ogImageURL} />
+{ogImageType && <meta property="og:image:type" content={ogImageType} />}
 <meta property="og:image:alt" content={ogAlt} />
 {ogWidth && <meta property="og:image:width" content={String(ogWidth)} />}
 {ogHeight && <meta property="og:image:height" content={String(ogHeight)} />}
