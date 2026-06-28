@@ -489,7 +489,8 @@ const navItems = [
 					setActive(current);
 				}
 			}
-			(scroller ?? window).addEventListener('scroll', onScroll, { passive: true });
+			window.addEventListener('scroll', onScroll, { passive: true });
+			if (scroller) scroller.addEventListener('scroll', onScroll, { passive: true });
 			onScroll();
 			setActive(activeId);
 
@@ -498,11 +499,16 @@ const navItems = [
 					e.preventDefault();
 					const id = link.dataset.nav;
 					const el = id ? document.getElementById(id) : null;
-					if (el && scroller) {
-						scroller.scrollTo({
-							top: el.offsetTop - 30,
-							behavior: 'smooth',
-						});
+					if (el) {
+						const usePaneScroll = scroller && window.innerWidth > 900;
+						if (usePaneScroll) {
+							scroller.scrollTo({ top: el.offsetTop - 30, behavior: 'smooth' });
+						} else {
+							window.scrollTo({
+								top: el.getBoundingClientRect().top + window.scrollY - 40,
+								behavior: 'smooth',
+							});
+						}
 					}
 				});
 			});
@@ -1246,18 +1252,86 @@ const navItems = [
 				animation: revealUp 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 			}
 
+			/* ── Tablet & below: linear single-column layout ── */
 			@media (max-width: 900px) {
 				.pf-layout {
 					display: block;
+					height: auto;
+					padding: 0 32px;
 				}
 				.pf-leftcol {
+					height: auto;
 					position: static;
-					min-height: auto;
-					padding-bottom: 40px;
+					padding: 48px 0 32px;
+					gap: 28px;
+				}
+				.pf-main {
+					height: auto;
+					overflow-y: visible;
+					padding: 0 0 80px;
+				}
+				.pf-nav {
+					display: none;
+				}
+				.pf-tagline {
+					max-width: none;
 				}
 				.pf-expertise-grid,
 				.pf-beyond-grid {
 					grid-template-columns: 1fr;
+				}
+				.pf-contact {
+					padding: 44px 0 80px;
+				}
+			}
+
+			/* ── Mobile: compact sizing ── */
+			@media (max-width: 540px) {
+				.pf-layout {
+					padding: 0 18px;
+				}
+				.pf-leftcol {
+					padding: 28px 0 20px;
+				}
+				.pf-name {
+					font-size: 28px;
+				}
+				.pf-tagline {
+					font-size: 17px;
+				}
+				.pf-metrics {
+					gap: 20px;
+				}
+				.pf-metric-num {
+					font-size: 36px;
+				}
+				.pf-role-card {
+					grid-template-columns: 1fr;
+					gap: 2px;
+				}
+				.pf-role-date {
+					padding-top: 0;
+				}
+				.pf-case {
+					padding: 20px 18px;
+				}
+				.pf-case-head {
+					flex-direction: column;
+					gap: 4px;
+				}
+				.pf-contact-actions {
+					flex-direction: column;
+					align-items: stretch;
+				}
+				.pf-contact-cta,
+				.pf-contact-link {
+					text-align: center;
+				}
+				.pf-social {
+					gap: 16px;
+				}
+				.pf-beyond-grid {
+					gap: 10px;
 				}
 			}
 		</style>
