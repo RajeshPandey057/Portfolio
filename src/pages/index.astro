@@ -1,6 +1,8 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import portrait from '../assets/portrait-square.jpg';
 import { SITE_DESCRIPTION, SITE_TAGLINE, SITE_TITLE } from '../consts';
 import { homePageGraph } from '../lib/seo';
@@ -8,12 +10,18 @@ import { homePageGraph } from '../lib/seo';
 const homeTitle = `${SITE_TITLE} — ${SITE_TAGLINE} | Cloud, Backend & Mobile`;
 const schema = homePageGraph(Astro.site);
 
+const latestPosts = (await getCollection('blog', ({ data }) => data.draft !== true))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+
 const navItems = [
 	{ id: 'about', label: 'About' },
 	{ id: 'experience', label: 'Experience' },
 	{ id: 'impact', label: 'Impact' },
+	{ id: 'services', label: 'Services' },
 	{ id: 'expertise', label: 'Expertise' },
 	{ id: 'projects', label: 'Projects' },
+	{ id: 'writing', label: 'Writing' },
 	{ id: 'beyond', label: 'Beyond' },
 	{ id: 'contact', label: 'Contact' },
 ];
@@ -236,6 +244,32 @@ const navItems = [
 						<div class="pf-cases">
 							<div class="reveal casecard pf-case">
 								<div class="pf-case-head">
+									<h3>From zero to acquisition</h3>
+									<span class="pf-case-tag">Medsi · co-founder</span>
+								</div>
+								<p class="pf-case-desc">
+									Co-founded Medsi, a telehealth platform for India, and built all of its
+									backend, API, and mobile infrastructure. Grew it to production scale —
+									and to an acquisition by HelloWellness in 2024.
+								</p>
+								<div class="pf-case-stats">
+									<div>
+										<div class="pf-case-stat">250K+</div>
+										<div class="pf-case-stat-label">app downloads</div>
+									</div>
+									<div>
+										<div class="pf-case-stat">5,000+</div>
+										<div class="pf-case-stat-label">consultations facilitated</div>
+									</div>
+									<div>
+										<div class="pf-case-stat">Acquired</div>
+										<div class="pf-case-stat-label">by HelloWellness, 2024</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="reveal casecard pf-case">
+								<div class="pf-case-head">
 									<h3>Zero-downtime commerce migration</h3>
 									<span class="pf-case-tag">Allia / Brello</span>
 								</div>
@@ -300,6 +334,57 @@ const navItems = [
 									</div>
 								</div>
 							</div>
+						</div>
+					</section>
+
+					<!-- SERVICES -->
+					<section id="services" class="pf-section">
+						<h2 class="reveal pf-eyebrow pf-eyebrow-accent">Services</h2>
+						<p class="reveal pf-lead">
+							I take on a small number of consulting engagements alongside my lead role —
+							the kind of work where a senior pair of hands changes the outcome.
+						</p>
+						<div class="pf-cases" style="margin-top: 26px;">
+							<div class="reveal casecard pf-case">
+								<div class="pf-case-head">
+									<h3>Healthcare platform engineering</h3>
+									<span class="pf-case-tag">HIPAA-aware · production-grade</span>
+								</div>
+								<p class="pf-case-desc">
+									Telehealth platforms, patient-facing apps, provider workflows, and the billing
+									and compliance plumbing underneath them. I've built these as a founder, an
+									architect, and a lead — I know where they break.
+								</p>
+							</div>
+							<div class="reveal casecard pf-case">
+								<div class="pf-case-head">
+									<h3>Cloud integrations &amp; migrations</h3>
+									<span class="pf-case-tag">GCP · event-driven</span>
+								</div>
+								<p class="pf-case-desc">
+									Event-driven integration backbones, third-party API orchestration, and live
+									migrations — billing handovers, data backfills, system cutovers — executed so
+									your customers never notice anything happened.
+								</p>
+							</div>
+							<div class="reveal casecard pf-case">
+								<div class="pf-case-head">
+									<h3>AI features that ship</h3>
+									<span class="pf-case-tag">LLM integration · tooling</span>
+								</div>
+								<p class="pf-case-desc">
+									Practical AI in production products: LLM-backed features, agent tooling, and
+									the evaluation and reliability work that separates a demo from something you
+									can put in front of users.
+								</p>
+							</div>
+						</div>
+						<div class="reveal pf-services-cta">
+							<a href="mailto:rajesh-pandey@outlook.in?subject=Consulting%20enquiry" class="pf-contact-cta">
+								<span class="pf-contact-cta-border"></span>
+								<span class="pf-contact-cta-label">Start a conversation</span>
+							</a>
+							<span class="pf-services-note">Typical engagements: 10–20 hrs/week, remote, 4+ week minimum.</span>
 						</div>
 					</section>
 
@@ -408,6 +493,31 @@ const navItems = [
 						</div>
 					</section>
 
+					<!-- WRITING -->
+					<section id="writing" class="pf-section">
+						<h2 class="reveal pf-eyebrow">Writing</h2>
+						<div class="reveal pf-projects">
+							{
+								latestPosts.map((post) => (
+									<a class="proj pf-project" href={`/blog/${post.id}/`}>
+										<div>
+											<h3>{post.data.title}</h3>
+											<p>{post.data.description}</p>
+											<div class="pf-project-meta">
+												<FormattedDate date={post.data.pubDate} />
+												{post.data.tags.length > 0 && ` · ${post.data.tags.slice(0, 3).join(' · ')}`}
+											</div>
+										</div>
+										<span class="pf-arrow">→</span>
+									</a>
+								))
+							}
+						</div>
+						<a href="/blog/" class="pf-resume-link">
+							All posts <span class="pf-arrow">→</span>
+						</a>
+					</section>
+
 					<!-- BEYOND -->
 					<section id="beyond" class="pf-section">
 						<h2 class="reveal pf-eyebrow">Beyond engineering</h2>
@@ -440,6 +550,11 @@ const navItems = [
 					<section id="contact" class="reveal pf-section pf-contact">
 						<h2 class="pf-eyebrow pf-eyebrow-accent">Contact</h2>
 						<h3 class="pf-contact-heading">Let's build something reliable.</h3>
+						<p class="pf-contact-availability">
+							Currently taking on 1–2 consulting engagements — healthcare platforms, cloud
+							integrations, and AI features. If that's your problem space, I'd like to hear
+							about it.
+						</p>
 						<div class="pf-contact-actions">
 							<a href="mailto:rajesh-pandey@outlook.in" class="pf-contact-cta">
 								<span class="pf-contact-cta-border"></span>
@@ -465,7 +580,7 @@ const navItems = [
 		</div>
 
 		<script>
-			const ids = ['about', 'experience', 'impact', 'expertise', 'projects', 'beyond', 'contact'];
+			const ids = ['about', 'experience', 'impact', 'services', 'expertise', 'projects', 'writing', 'beyond', 'contact'];
 			const sections = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
 			const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('.pf-nav-link'));
 			const scroller = document.querySelector<HTMLElement>('.pf-main');
@@ -1178,6 +1293,27 @@ const navItems = [
 				color: #e2622f;
 			}
 
+			.pf-services-cta {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 18px;
+				margin-top: 28px;
+			}
+			.pf-services-note {
+				font-family: 'JetBrains Mono', monospace;
+				font-size: 11.5px;
+				color: #8a8275;
+			}
+
+			.pf-contact-availability {
+				font-size: 15px;
+				line-height: 1.65;
+				color: #a9a192;
+				max-width: 52ch;
+				margin: 22px 0 0;
+			}
+
 			.pf-contact {
 				padding: 44px 0 88px;
 			}
@@ -1250,6 +1386,19 @@ const navItems = [
 			.reveal {
 				opacity: 1;
 				animation: revealUp 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.pf-aurora-blob-1,
+				.pf-aurora-blob-2,
+				.pf-grid,
+				.pf-contact-cta-border,
+				.reveal {
+					animation: none;
+				}
+				:global(html) {
+					scroll-behavior: auto;
+				}
 			}
 
 			/* ── Tablet & below: linear single-column layout ── */

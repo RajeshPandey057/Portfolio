@@ -1,3 +1,24 @@
+## Multi-agent delegation (standing rule)
+
+Two delegate CLIs are installed on this machine. Offload work to them whenever practical
+instead of doing everything inline — Claude's context is for judgment, not mechanical work:
+
+- **Codex CLI** — engineering-heavy, well-specified tasks: scripts, parsers, bulk file
+  generation/edits, data extraction, report/dashboard regeneration, tests, docs.
+  Non-interactive: `codex exec --sandbox workspace-write "<precise task>"` (run from the
+  target directory or pass `--cd`).
+- **AGY (Antigravity CLI)** — independent agentic subtasks: research, large-scale analysis,
+  parallel or long-running workflows.
+  Non-interactive: `agy --print "<prompt>"` (add `--add-dir <path>` for workspace access).
+
+Orchestration: Claude plans → decomposes → delegates → **reviews and validates delegate
+output** → integrates. Judgment-heavy work (analysis, legal/financial interpretation,
+strategy, final integration) stays with Claude. Delegate prompts must be self-contained —
+delegates have no conversation context. Run delegates in the background when they may take
+more than a few seconds. Never accept delegate output unreviewed.
+
+The detailed task-routing table lives in `.warehouse/README.md` (private, gitignored).
+
 ## Development
 
 When starting the dev server, use background mode:
