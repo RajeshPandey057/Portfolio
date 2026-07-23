@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # Personal financial warehouse — never commit
 .warehouse/
+
+# Personal finance source documents (bank/brokerage statements, tax files) — never commit
+.finance/
