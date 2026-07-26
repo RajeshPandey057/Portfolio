@@ -17,7 +17,8 @@ strategy, final integration) stays with Claude. Delegate prompts must be self-co
 delegates have no conversation context. Run delegates in the background when they may take
 more than a few seconds. Never accept delegate output unreviewed.
 
-The detailed task-routing table lives in `.warehouse/README.md` (private, gitignored).
+The detailed task-routing table lives in `~/Developer/Personal/thousand-sunny/README.md`
+(separate private repo).
 
 ## Development
 
