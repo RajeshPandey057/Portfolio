@@ -20,8 +20,8 @@
 
 - Decision: use `https://rajeshpandey.dev` as the sole production origin in source and generated output.
   - Rationale: keeps sitemap, RSS, canonical metadata, social metadata, JSON-LD, and discovery endpoints consistent.
-  - Alternative: retain the previous `.site` origin or add redirects in code.
-  - Status: implemented; redirects and external domain configuration are out of scope.
+  - Alternative: retain the previous `.site` origin or handle the legacy-domain redirect in application code.
+  - Status: implemented; Netlify redirects the legacy `.site` domain through the built `_redirects` file.
 - Decision: keep URL construction centralized through `Astro.site` and `SITE_URL`.
   - Rationale: avoids duplicating absolute URLs across templates and schema builders.
   - Status: current convention.
@@ -33,6 +33,7 @@
 ## Completed Work
 
 - Updated the configured site origin, shared fallback URL, crawler metadata, `llms.txt` fallback, and social-card source to `rajeshpandey.dev`.
+- Added a permanent Netlify redirect from `rajeshpandey.site` paths to their equivalents on `rajeshpandey.dev`.
 - Added the Netlify deploy-status badge beneath the README heading.
 - Regenerated the brand assets, visually checked the social card, and completed a production build.
 - Confirmed the previous production domain no longer appears in repository or generated build output.
@@ -41,6 +42,7 @@
 
 - `BaseHead.astro` and `src/lib/seo.ts` contain no hardcoded production domain; their output follows `Astro.site` and `SITE_URL`.
 - `package.json` has no `homepage` field.
+- Astro copies `public/_redirects` unchanged to `dist/_redirects`, where Netlify can consume it.
 - The social-card domain is rasterized into `public/og.png`, so the asset generator must run whenever it changes.
 
 ## Technical Debt
@@ -65,5 +67,5 @@
 - Current status: the domain migration, asset regeneration, and production verification are complete.
 - Blockers: none.
 - Next steps: deploy through the existing workflow after the external domain configuration is ready.
-- Relevant files: `astro.config.mjs`, `src/consts.ts`, `src/pages/llms.txt.ts`, `public/robots.txt`, `scripts/generate-assets.mjs`, and `README.md`.
+- Relevant files: `astro.config.mjs`, `src/consts.ts`, `src/pages/llms.txt.ts`, `public/_redirects`, `public/robots.txt`, `scripts/generate-assets.mjs`, and `README.md`.
 - Useful commands: `node scripts/generate-assets.mjs` and `bun run build`.
