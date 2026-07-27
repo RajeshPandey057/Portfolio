@@ -1,5 +1,7 @@
 # Astro Starter Kit: Blog
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/05bd6a5f-0918-49c3-91b5-0be391b15fbf/deploy-status)](https://app.netlify.com/projects/rajeshpandey057/deploys)
+
 ```sh
 bun create astro@latest -- --template blog
 ```

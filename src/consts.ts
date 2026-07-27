@@ -7,7 +7,7 @@ export const SITE_DESCRIPTION =
 	'Lead Technical Engineer building cloud architecture, backend services, and the mobile apps behind healthcare platforms. I work across backend, frontend, mobile, and DevOps — and gravitate to the messy parts: migrations, integrations, and keeping production reliable.';
 
 // Canonical production origin. Keep in sync with `site` in astro.config.mjs.
-export const SITE_URL = 'https://rajeshpandey.site';
+export const SITE_URL = 'https://rajeshpandey.dev';
 
 // BCP-47 page language and Open Graph locale.
 export const SITE_LANG = 'en';

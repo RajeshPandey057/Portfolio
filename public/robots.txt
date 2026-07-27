@@ -1,4 +1,4 @@
-# robots.txt — rajeshpandey.site
+# robots.txt — rajeshpandey.dev
 # Search engines and AI assistants are welcome. This site is meant to be
 # discoverable and citable by both traditional crawlers and LLM-based agents.
 
@@ -69,4 +69,4 @@ User-agent: CCBot
 Allow: /
 
 # Helpful entry points for crawlers and agents.
-Sitemap: https://rajeshpandey.site/sitemap-index.xml
+Sitemap: https://rajeshpandey.dev/sitemap-index.xml

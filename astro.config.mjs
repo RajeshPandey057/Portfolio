@@ -10,7 +10,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://rajeshpandey.site',
+  site: 'https://rajeshpandey.dev',
   // Emit clean URLs without a trailing slash for canonical consistency.
   trailingSlash: 'ignore',
   integrations: [

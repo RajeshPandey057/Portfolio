@@ -84,7 +84,7 @@ const ogBg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" 
 
   <!-- footer / domain -->
   <line x1="82" y1="520" x2="660" y2="520" stroke="${CREAM}" stroke-opacity="0.12" stroke-width="1"/>
-  <text x="82" y="560" font-family="${MONO}" font-size="22" letter-spacing="1" fill="#8a8275">rajeshpandey.site</text>
+  <text x="82" y="560" font-family="${MONO}" font-size="22" letter-spacing="1" fill="#8a8275">rajeshpandey.dev</text>
 </svg>`;
 
 async function run() {

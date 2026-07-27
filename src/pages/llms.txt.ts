@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 import { AUTHOR, ORG, SITE_TITLE } from '../consts';
 
 export const GET: APIRoute = async (context) => {
-	const site = context.site ?? new URL('https://rajeshpandey.site');
+	const site = context.site ?? new URL('https://rajeshpandey.dev');
 	const url = (path: string) => new URL(path, site).href;
 
 	const posts = (await getCollection('blog', ({ data }) => data.draft !== true)).sort(
