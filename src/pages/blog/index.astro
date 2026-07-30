@@ -9,12 +9,16 @@ import { SITE_TITLE } from '../../consts';
 import { blogIndexGraph } from '../../lib/seo';
 
 const BLOG_DESCRIPTION =
-	'Field notes on cloud architecture, backend systems, migrations, and building reliable healthcare software — by Rajesh Pandey.';
+	'Practical engineering notes from production: healthcare platforms, subscription migrations, cloud integrations, and technical leadership.';
 
-const posts = (await getCollection('blog', ({ data }) => data.draft !== true)).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('blog', ({ data }) => data.draft !== true))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.map((post) => ({
+		...post,
+		readingTime: Math.max(1, Math.round((post.body?.trim().split(/\s+/).length ?? 0) / 200)),
+	}));
 
+const [featuredPost, ...remainingPosts] = posts;
 const schema = blogIndexGraph(
 	Astro.site,
 	posts.map((post) => ({
@@ -30,139 +34,96 @@ const schema = blogIndexGraph(
 <html lang="en">
 	<head>
 		<BaseHead
-			title={`Blog — ${SITE_TITLE}`}
+			title={`Engineering writing | ${SITE_TITLE}`}
 			description={BLOG_DESCRIPTION}
-			preloadFonts={['--font-atkinson']}
+			canonicalPath="/blog/"
+			preloadFonts={['--font-display', '--font-atkinson']}
 			schema={schema}
 		/>
-		<style>
-			main {
-				width: 960px;
-			}
-			.blog-intro {
-				margin-bottom: 2.5rem;
-			}
-			.blog-intro h1 {
-				margin-bottom: 0.25em;
-			}
-			.blog-intro p {
-				color: rgb(var(--gray));
-				margin: 0;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.desc {
-				margin: 0.4em 0 0;
-				color: rgb(var(--gray));
-				font-size: 1rem;
-				line-height: 1.5;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: var(--accent);
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			.empty {
-				border: 1px dashed rgb(var(--gray-light));
-				border-radius: 12px;
-				padding: 3rem 2rem;
-				text-align: center;
-				color: rgb(var(--gray));
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section class="blog-intro">
-				<h1>Writing</h1>
+		<main id="main-content" class="blog-main">
+			<header class="shell blog-hero">
+				<h1>Practical notes from production.</h1>
 				<p>{BLOG_DESCRIPTION}</p>
-			</section>
-			<section>
+				<div class="blog-topics" aria-label="Topics covered">
+					<span class="topic-label">Healthcare engineering</span>
+					<span class="topic-label">Billing and migrations</span>
+					<span class="topic-label">Cloud integrations</span>
+					<span class="topic-label">Engineering leadership</span>
+				</div>
+			</header>
+
+			<section class="shell" aria-label="Published articles">
 				{
-					posts.length === 0 ? (
-						<div class="empty">
-							<p>First posts are on the way — notes from production are in progress.</p>
+					!featuredPost ? (
+						<div class="empty-state">
+							<p>First articles are in progress.</p>
 						</div>
 					) : (
-						<ul>
-							{posts.map((post) => (
-								<li>
-									<a href={`/blog/${post.id}/`}>
-										{post.data.heroImage && (
-											<Image
-												width={720}
-												height={360}
-												src={post.data.heroImage}
-												alt={post.data.heroImageAlt ?? post.data.title}
-											/>
-										)}
-										<h4 class="title">{post.data.title}</h4>
-										<p class="date">
-											<FormattedDate date={post.data.pubDate} />
-										</p>
-										<p class="desc">{post.data.description}</p>
-									</a>
-								</li>
-							))}
-						</ul>
+						<>
+							<a class="blog-featured" href={`/blog/${featuredPost.id}/`}>
+								{featuredPost.data.heroImage && (
+									<div class="blog-featured-media">
+										<Image
+											src={featuredPost.data.heroImage}
+											alt={featuredPost.data.heroImageAlt ?? featuredPost.data.title}
+											width={1200}
+											height={675}
+											widths={[640, 960, 1200, 1600]}
+											sizes="(max-width: 900px) 100vw, 62vw"
+											loading="eager"
+										/>
+									</div>
+								)}
+								<div class="blog-featured-copy">
+									<p class="article-topic">{featuredPost.data.tags[0] ?? 'Engineering'}</p>
+									<h2>{featuredPost.data.title}</h2>
+									<p>{featuredPost.data.description}</p>
+									<div class="post-meta">
+										<span><FormattedDate date={featuredPost.data.pubDate} /></span>
+										<span>{featuredPost.readingTime} min read</span>
+									</div>
+								</div>
+							</a>
+
+							{remainingPosts.length > 0 && (
+								<div class="article-list">
+									<div class="article-list-header">
+										<h2>More articles</h2>
+										<a href="/rss.xml">RSS feed</a>
+									</div>
+									{remainingPosts.map((post) => (
+										<article>
+											<a class="article-row" href={`/blog/${post.id}/`}>
+												{post.data.heroImage && (
+													<div class="article-row-image">
+														<Image
+															src={post.data.heroImage}
+															alt={post.data.heroImageAlt ?? post.data.title}
+															width={480}
+															height={270}
+															widths={[320, 480]}
+															sizes="12rem"
+														/>
+													</div>
+												)}
+												<div>
+													<div class="post-meta">
+														<span><FormattedDate date={post.data.pubDate} /></span>
+														<span>{post.readingTime} min read</span>
+													</div>
+													<h3>{post.data.title}</h3>
+													<p>{post.data.description}</p>
+												</div>
+												<span class="article-row-arrow" aria-hidden="true">→</span>
+											</a>
+										</article>
+									))}
+								</div>
+							)}
+						</>
 					)
 				}
 			</section>

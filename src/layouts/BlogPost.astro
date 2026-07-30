@@ -1,6 +1,7 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage, Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import portrait from '../assets/portrait-square.jpg';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
@@ -8,28 +9,64 @@ import Header from '../components/Header.astro';
 import { AUTHOR } from '../consts';
 import { blogPostGraph } from '../lib/seo';
 
+type Heading = {
+	depth: number;
+	slug: string;
+	text: string;
+};
+
+type RelatedPost = {
+	slug: string;
+	title: string;
+	description: string;
+};
+
 type Props = CollectionEntry<'blog'>['data'] & {
 	slug: string;
 	readingTime: number;
+	headings: Heading[];
+	relatedPosts: RelatedPost[];
 };
 
 const {
 	title,
+	seoTitle,
 	description,
 	pubDate,
 	updatedDate,
 	heroImage,
 	heroImageAlt,
 	tags = [],
+	takeaways = [],
 	author = AUTHOR.name,
 	slug,
 	readingTime,
+	headings,
+	relatedPosts,
 } = Astro.props;
 
 const path = `/blog/${slug}/`;
 const ogImage = heroImage
 	? new URL(heroImage.src, Astro.site).href
 	: new URL('/og.png', Astro.site).href;
+const structuredImages = heroImage
+	? await Promise.all(
+			[
+				{ width: 1600, height: 900 },
+				{ width: 1200, height: 900 },
+				{ width: 1000, height: 1000 },
+			].map(async ({ width, height }) => {
+				const result = await getImage({
+					src: heroImage,
+					width,
+					height,
+					fit: 'cover',
+					format: 'webp',
+				});
+				return new URL(result.src, Astro.site).href;
+			}),
+		)
+	: [ogImage];
 
 const schema = blogPostGraph(Astro.site, {
 	title,
@@ -37,16 +74,17 @@ const schema = blogPostGraph(Astro.site, {
 	path,
 	pubDate,
 	updatedDate,
-	image: ogImage,
+	image: structuredImages,
 	imageAlt: heroImageAlt,
 	tags,
 });
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead
-			title={`${title} — ${AUTHOR.name}`}
+			title={`${seoTitle ?? title} | ${AUTHOR.name}`}
 			description={description}
 			image={heroImage}
 			imageAlt={heroImageAlt ?? title}
@@ -55,131 +93,135 @@ const schema = blogPostGraph(Astro.site, {
 			modifiedTime={updatedDate}
 			tags={tags}
 			canonicalPath={path}
-			preloadFonts={['--font-atkinson']}
+			preloadFonts={['--font-display', '--font-newsreader']}
 			schema={schema}
 		/>
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.breadcrumb {
-				font-size: 0.85rem;
-				color: rgb(var(--gray));
-				margin-bottom: 1.5em;
-			}
-			.breadcrumb a {
-				color: rgb(var(--gray));
-			}
-			.breadcrumb a:hover {
-				color: var(--accent);
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.meta {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-				font-size: 0.95rem;
-			}
-			.meta .sep {
-				margin: 0 0.4em;
-				opacity: 0.5;
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-			.tags {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.5em;
-				justify-content: center;
-				margin-top: 1em;
-				list-style: none;
-				padding: 0;
-			}
-			.tags li {
-				font-size: 0.8rem;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 100px;
-				padding: 0.25em 0.8em;
-				color: rgb(var(--gray));
-			}
-		</style>
 	</head>
 
 	<body>
 		<Header />
-		<main>
+		<main id="main-content" class="article-page">
 			<article>
-				{
-					heroImage && (
-						<div class="hero-image">
-							<Image
-								width={1020}
-								height={510}
-								src={heroImage}
-								alt={heroImageAlt ?? title}
-							/>
-						</div>
-					)
-				}
-				<div class="prose">
+				<header class="shell article-header">
 					<nav class="breadcrumb" aria-label="Breadcrumb">
-						<a href="/">Home</a> / <a href="/blog">Blog</a> / <span>{title}</span>
+						<a href="/">Home</a>
+						<span aria-hidden="true"> / </span>
+						<a href="/blog/">Writing</a>
 					</nav>
-					<div class="title">
-						<div class="meta">
-							<FormattedDate date={pubDate} />
-							<span class="sep">·</span>
-							{readingTime} min read
-							<span class="sep">·</span>
-							<span>{author}</span>
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
+					<h1>{title}</h1>
+					<p class="article-deck">{description}</p>
+					<div class="post-meta">
+						<span>By {author}</span>
+						<span>Published <FormattedDate date={pubDate} /></span>
+						<span>{readingTime} min read</span>
 						{
-							tags.length > 0 && (
-								<ul class="tags">
-									{tags.map((tag) => (
-										<li>{tag}</li>
-									))}
-								</ul>
+							updatedDate && (
+								<span>
+									Updated <FormattedDate date={updatedDate} />
+								</span>
 							)
 						}
-						<hr />
 					</div>
-					<slot />
+				</header>
+
+				{
+					heroImage && (
+						<figure class="article-hero-image">
+							<Image
+								src={heroImage}
+								alt={heroImageAlt ?? title}
+								width={1600}
+								height={800}
+								widths={[720, 1020, 1440, 1800]}
+								sizes="(max-width: 680px) 100vw, 90rem"
+								loading="eager"
+							/>
+						</figure>
+					)
+				}
+
+				<div class="article-layout">
+					<div class="article-body">
+						{
+							takeaways.length > 0 && (
+								<aside class="article-summary" aria-labelledby="takeaways-title">
+									<h2 id="takeaways-title">Key takeaways</h2>
+									<ul>
+										{takeaways.map((takeaway) => <li>{takeaway}</li>)}
+									</ul>
+								</aside>
+							)
+						}
+						<slot />
+					</div>
+
+					<aside class="article-sidebar" aria-label="Article information">
+						{
+							headings.length > 0 && (
+								<div class="article-sidebar-block">
+									<p class="article-sidebar-title">In this article</p>
+									<nav class="article-toc" aria-label="Table of contents">
+										{headings.map((heading) => (
+											<a href={`#${heading.slug}`}>{heading.text}</a>
+										))}
+									</nav>
+								</div>
+							)
+						}
+						{
+							tags.length > 0 && (
+								<div class="article-sidebar-block">
+									<p class="article-sidebar-title">Topics</p>
+									<ul class="article-tags">
+										{tags.map((tag) => (
+											<li class="topic-label">{tag}</li>
+										))}
+									</ul>
+								</div>
+							)
+						}
+					</aside>
 				</div>
+
+				<section class="article-author" aria-labelledby="author-title">
+					<Image
+						src={portrait}
+						alt="Rajesh Pandey"
+						width={128}
+						height={128}
+						widths={[96, 128, 192]}
+						sizes="4rem"
+					/>
+					<div>
+						<h2 id="author-title">Written by Rajesh Pandey</h2>
+						<p>
+							Lead Technical Engineer building healthcare platforms across cloud, backend,
+							mobile, migrations, and production integrations.
+						</p>
+						<a class="text-link" href="/#about">
+							About Rajesh <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</section>
+
+				{
+					relatedPosts.length > 0 && (
+						<section class="related-reading" aria-labelledby="related-title">
+							<h2 id="related-title">Related reading</h2>
+							<div class="related-grid">
+								{relatedPosts.map((post) => (
+									<a class="related-card" href={`/blog/${post.slug}/`}>
+										<h3>{post.title}</h3>
+										<p>{post.description}</p>
+									</a>
+								))}
+							</div>
+							<a class="text-link" href="/blog/">
+								Back to writing <span aria-hidden="true">→</span>
+							</a>
+						</section>
+					)
+				}
 			</article>
 		</main>
 		<Footer />

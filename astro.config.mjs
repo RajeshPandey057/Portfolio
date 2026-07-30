@@ -11,15 +11,11 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://rajeshpandey.dev',
-  // Emit clean URLs without a trailing slash for canonical consistency.
+  // Accept either request form. Source links and canonicals use directory-style URLs.
   trailingSlash: 'ignore',
   integrations: [
     mdx(),
-    sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-    }),
+    sitemap(),
     svelte(),
   ],
 
@@ -51,9 +47,9 @@ export default defineConfig({
     },
     {
       provider: fontProviders.google(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: ['400', '500', '600'],
+      name: 'Manrope',
+      cssVariable: '--font-display',
+      weights: ['400', '500', '600', '700'],
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['sans-serif'],
