@@ -23,9 +23,9 @@
 
 ## Decisions
 
-- Decision: use one restrained editorial-tech visual language across the portfolio and blog.
-  - Rationale: the previous homepage and starter-style blog felt unrelated.
-  - Implementation: Manrope display type, Newsreader article type, Atkinson body type, JetBrains Mono metadata, warm near-black/ivory neutrals, and one coral accent.
+- Decision: present the homepage as a personal engineering dossier rather than a product or consulting landing page.
+  - Rationale: a polished outcome-led redesign obscured Rajesh behind product-marketing patterns. Recruiters and engineering leaders need the person, role, ownership, technical decisions, and work samples first.
+  - Implementation: personal introduction and compact portrait, sticky section index, project-led evidence, visible role and stack details, concise experience, and restrained developer-native interactions. The blog keeps its editorial reading system.
   - Status: implemented.
 - Decision: keep the existing route structure and canonical production origin.
   - Rationale: protects existing links and search continuity during the redesign.
@@ -42,6 +42,14 @@
 - Decision: keep `llms.txt` as supplemental discovery content rather than treating it as a ranking mechanism.
   - Rationale: search and generative discovery still depend primarily on crawlability, original content, structure, internal links, and authority.
   - Status: current convention.
+- Decision: use optional interactions for personality without obstructing hiring information.
+  - Rationale: developer portfolios benefit from memorable craft, but the primary path must remain fast, semantic, and accessible.
+  - Implementation: a keyboard-accessible command palette and a Konami-code debug mode. Both are progressively enhanced and honor reduced-motion styling.
+  - Status: implemented.
+- Decision: give light and dark modes distinct but complementary color identities.
+  - Rationale: cobalt with cool mineral neutrals communicates clinical trust and technical precision more clearly than warm cream, cold monochrome, or wellness-adjacent forest. The warm terracotta dark theme remains the stronger low-light expression.
+  - Implementation: light mode uses cobalt accents over blue-gray surfaces; dark mode retains its existing charcoal and terracotta tokens.
+  - Status: implemented.
 
 ## Current Tasks
 
@@ -49,7 +57,8 @@
 
 ## Completed Work
 
-- Rebuilt the homepage around a direct healthcare-engineering value proposition, quantified proof, selected outcomes, concise experience, capabilities, projects, writing, about, and contact.
+- Reframed the homepage around Rajesh as an engineer: personal introduction, selected engineering work, ownership and decision evidence, experience, technical focus, side projects, writing, about, and contact.
+- Added functional keyboard navigation through `Cmd/Ctrl+K`, command filtering, direct résumé/GitHub/contact actions, and a hidden debug-mode easter egg.
 - Replaced the nested desktop scroller, rotating title, count-up metrics, aurora, animated grid, glowing status dot, and spinning border treatment with normal document flow and restrained motion.
 - Unified navigation and footer behavior across every route, including a skip link, visible focus states, mobile navigation, and current-page semantics.
 - Rebuilt the blog index with a clear editorial hierarchy, featured article, topics, reading time, RSS discovery, and semantic article headings.
@@ -57,11 +66,14 @@
 - Added concise search titles, updated descriptions, article update dates, topic-specific cover art, descriptive alt text, and three structured-data image aspect ratios per post.
 - Updated visible content and discovery copy to keep the Medsi founder role, acquisition story, and measurable outcomes consistent.
 - Removed the ignored global meta-keywords output and inaccurate global sitemap freshness fields.
+- Recalibrated light mode to a cool cobalt and mineral-white palette, while preserving the warm terracotta dark theme.
+- Simplified the homepage hero to two distinct actions: selected work and résumé. GitHub remains available in the global navigation.
 - Verified a production build, built redirect artifact, generated sitemap, canonical metadata, responsive image output, mobile overflow, heading structure, image alt text, and article table-of-contents links.
 
 ## Important Discoveries
 
 - The portfolio already contained strong evidence: 250,000+ Medsi downloads, 5,000+ consultations, a 2024 acquisition, a live WooCommerce-to-Stripe migration, and 7+ production integrations. The main issue was prioritization, not a lack of credible material.
+- Outcome-led hero copy, oversized case imagery, capability cards, and repeated conversion CTAs made the first redesign feel like a product or agency site. Developer identity is clearer when the page leads with the person and makes each claim resolve into role, system, decision, and result.
 - The previous blog inherited generic Bear/Astro styling and conflicted with the homepage theme.
 - Both posts had no hero image, so article listings and social metadata fell back to generic branding.
 - Astro's font and image pipeline requires local network access during builds in the restricted development environment.
@@ -93,8 +105,8 @@
 
 ## Handoff Notes
 
-- Current objective: maintain and extend the redesigned portfolio and editorial blog.
-- Current status: redesign and local verification are complete; no production deployment was performed.
+- Current objective: maintain and extend the personal developer portfolio and editorial engineering blog.
+- Current status: implementation, production build, responsive browser review, interaction testing, and static checks are complete. No production deployment was performed.
 - Blockers: none.
 - Next steps:
   1. Deploy through the existing hosting workflow.

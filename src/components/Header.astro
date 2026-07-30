@@ -1,5 +1,6 @@
 ---
 import { SITE_TITLE } from '../consts';
+import CommandPalette from './CommandPalette.astro';
 import HeaderLink from './HeaderLink.astro';
 ---
 
@@ -7,15 +8,20 @@ import HeaderLink from './HeaderLink.astro';
 <header class="site-header">
 	<nav class="site-nav shell" aria-label="Primary navigation">
 		<a class="site-wordmark" href="/" aria-label={`${SITE_TITLE} home`}>
-			<span aria-hidden="true">RP</span>
-			<span>{SITE_TITLE}</span>
+			<span aria-hidden="true">~/</span>
+			<span>rajeshpandey.dev</span>
 		</a>
 		<div class="site-nav-links">
-			<HeaderLink href="/#impact">Work</HeaderLink>
-			<HeaderLink href="/#experience">Experience</HeaderLink>
+			<HeaderLink href="/#work">Work</HeaderLink>
 			<HeaderLink href="/blog/">Writing</HeaderLink>
 			<HeaderLink href="/#about">About</HeaderLink>
 		</div>
-		<a class="button button-small" href="mailto:rajesh-pandey@outlook.in">Contact</a>
+		<div class="site-nav-actions">
+			<a href="https://github.com/RajeshPandey057" target="_blank" rel="noopener">GitHub</a>
+			<button class="command-trigger" type="button" aria-haspopup="dialog" aria-controls="command-menu" data-command-open>
+				Jump <kbd>⌘ K</kbd>
+			</button>
+		</div>
 	</nav>
+	<CommandPalette />
 </header>

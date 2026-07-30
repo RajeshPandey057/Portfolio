@@ -36,7 +36,7 @@ He works across backend, frontend, mobile, DevOps, and product, with a focus on 
 - Technical leadership: leading delivery across backend, frontend, mobile, DevOps, QA, and product.
 
 ## Pages
-- [Home / Profile](${url('/')}): Full profile with experience, selected impact, expertise, side projects, and contact.
+- [Home / Profile](${url('/')}): Full profile with selected engineering work, experience, technical focus, side projects, writing, and contact.
 - [Blog](${url('/blog/')}): Writing on cloud architecture, backend systems, migrations, and reliable healthcare software.
 
 ## Blog posts

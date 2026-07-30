@@ -6,11 +6,12 @@ const today = new Date();
 <footer class="site-footer">
 	<div class="shell footer-grid">
 		<div>
-			<p class="footer-heading">Build systems people can rely on.</p>
+			<p class="footer-heading">{SITE_TITLE}</p>
+			<p class="footer-role">Lead Technical Engineer working across cloud, backend, and mobile.</p>
 			<a class="footer-email" href={SOCIAL.email}>rajesh-pandey@outlook.in</a>
 		</div>
 		<nav class="footer-links" aria-label="Footer navigation">
-			<a href="/#impact">Selected work</a>
+			<a href="/#work">Selected work</a>
 			<a href="/blog/">Writing</a>
 			<a href="/resume.pdf" target="_blank" rel="noopener">Résumé</a>
 			<a href={SOCIAL.github} target="_blank" rel="noopener">GitHub</a>
@@ -19,6 +20,6 @@ const today = new Date();
 	</div>
 	<div class="shell footer-meta">
 		<span>&copy; {today.getFullYear()} {SITE_TITLE}</span>
-		<span>Surat, Gujarat, India</span>
+		<span>Built with Astro. There is one classic cheat code.</span>
 	</div>
 </footer>
