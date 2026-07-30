@@ -1,11 +1,11 @@
-# robots.txt — rajeshpandey.dev
+# robots.txt for rajeshpandey.dev
 # Search engines and AI assistants are welcome. This site is meant to be
 # discoverable and citable by both traditional crawlers and LLM-based agents.
 
 User-agent: *
 Allow: /
 
-# --- Search engines ---
+# Search engines
 User-agent: Googlebot
 Allow: /
 
@@ -18,7 +18,7 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
-# --- AI / LLM crawlers (training + retrieval + live browsing) ---
+# AI and LLM crawlers (training, retrieval, and live browsing)
 # Explicitly allowed so this profile can be discovered, summarized, and cited.
 User-agent: GPTBot
 Allow: /

@@ -4,7 +4,7 @@
 export const SITE_TITLE = 'Rajesh Pandey';
 export const SITE_TAGLINE = 'Lead Technical Engineer';
 export const SITE_DESCRIPTION =
-	'Lead Technical Engineer building cloud architecture, backend services, and the mobile apps behind healthcare platforms. I work across backend, frontend, mobile, and DevOps — and gravitate to the messy parts: migrations, integrations, and keeping production reliable.';
+	'Lead Technical Engineer building dependable healthcare platforms across cloud architecture, backend services, mobile apps, migrations, and production integrations.';
 
 // Canonical production origin. Keep in sync with `site` in astro.config.mjs.
 export const SITE_URL = 'https://rajeshpandey.dev';
@@ -18,7 +18,7 @@ export const OG_IMAGE = {
 	src: '/og.png',
 	width: 1200,
 	height: 630,
-	alt: 'Rajesh Pandey — Lead Technical Engineer building cloud, backend, and mobile for healthcare platforms.',
+	alt: 'Rajesh Pandey, Lead Technical Engineer building cloud, backend, and mobile systems for healthcare platforms.',
 };
 
 // The person this site is about. Powers schema.org Person/ProfilePage and meta tags.
@@ -61,7 +61,7 @@ export const AUTHOR = {
 	],
 };
 
-// Current employer — schema.org Organization (worksFor) + structured data publisher.
+// Current employer used for Organization and worksFor structured data.
 export const ORG = {
 	name: 'Allia Health Group',
 };
@@ -79,7 +79,7 @@ export const SOCIAL = {
 	email: 'mailto:rajesh-pandey@outlook.in',
 };
 
-// Topical keywords. Kept conservative — used for the <meta name="keywords"> hint and llms.txt.
+// Topical identity terms used by discovery content such as llms.txt.
 export const SITE_KEYWORDS = [
 	'Rajesh Pandey',
 	'Lead Technical Engineer',

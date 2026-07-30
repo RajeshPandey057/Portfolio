@@ -103,7 +103,7 @@ export function homePageGraph(site: Site): SchemaNode {
 				'@type': 'ProfilePage',
 				'@id': abs('/#profilepage', site),
 				url: abs('/', site),
-				name: `${SITE_TITLE} — ${AUTHOR.jobTitle}`,
+				name: `${SITE_TITLE} | ${AUTHOR.jobTitle}`,
 				isPartOf: { '@id': websiteId(site) },
 				about: { '@id': personId(site) },
 				mainEntity: { '@id': personId(site) },
@@ -128,9 +128,9 @@ export function blogIndexGraph(
 				'@type': ['CollectionPage', 'Blog'],
 				'@id': abs('/blog/#blog', site),
 				url: abs('/blog/', site),
-				name: `Blog — ${SITE_TITLE}`,
+				name: `Engineering writing | ${SITE_TITLE}`,
 				description:
-					'Field notes on cloud architecture, backend systems, migrations, and building reliable healthcare software.',
+					'Practical engineering notes from production: healthcare platforms, subscription migrations, cloud integrations, and technical leadership.',
 				isPartOf: { '@id': websiteId(site) },
 				inLanguage: 'en',
 				author: { '@id': personId(site) },
@@ -159,7 +159,7 @@ export function blogPostGraph(
 		path: string;
 		pubDate: Date;
 		updatedDate?: Date;
-		image: string;
+		image: string | string[];
 		imageAlt?: string;
 		tags?: string[];
 	},

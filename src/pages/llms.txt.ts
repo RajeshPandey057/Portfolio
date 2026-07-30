@@ -1,4 +1,4 @@
-// /llms.txt — a Markdown summary of the site for LLMs / AI agents at inference
+// /llms.txt is a Markdown summary of the site for LLMs and AI agents at inference
 // time (https://llmstxt.org/). Generated dynamically so published blog posts
 // are always reflected. Drafts are excluded.
 
@@ -19,24 +19,24 @@ export const GET: APIRoute = async (context) => {
 			? posts
 					.map((p) => `- [${p.data.title}](${url(`/blog/${p.id}/`)}): ${p.data.description}`)
 					.join('\n')
-			: '- No posts published yet — writing in progress.';
+			: '- No posts published yet. Writing is in progress.';
 
 	const body = `# ${SITE_TITLE}
 
 > Lead Technical Engineer building cloud architecture, backend services, and the mobile apps behind healthcare platforms. Based in ${AUTHOR.location.locality}, ${AUTHOR.location.region}, ${AUTHOR.location.country}.
 
-${AUTHOR.name} leads technical delivery across ${ORG.name}'s healthcare products — cloud integration services, patient platforms, and the mobile apps people actually use. The career path ran through an acquisition and a merger: helped build Medsi (acquired by HelloWellness, where he was Lead Software Engineer & Architect), which then merged into ${ORG.name}. Earlier, built enterprise systems at Tata Consultancy Services.
+${AUTHOR.name} leads technical delivery across ${ORG.name}'s healthcare products, including cloud integration services, patient platforms, and mobile applications. He co-founded Medsi and led its backend, API, and mobile infrastructure through more than 250,000 downloads, over 5,000 consultations, and its 2024 acquisition by HelloWellness. He later served as Lead Software Engineer and Architect at HelloWellness before it merged into ${ORG.name}. Earlier, he built enterprise systems at Tata Consultancy Services.
 
-Works across the whole stack — backend, frontend, mobile, DevOps, and product — and gravitates to the messy parts: migrations, data backfills, billing handovers, and making complex healthcare systems reliable in production. Builds developer and AI tooling on the side.
+He works across backend, frontend, mobile, DevOps, and product, with a focus on migrations, data backfills, billing handovers, integrations, and production reliability. He also builds developer and AI tooling.
 
 ## Core expertise
 - Cloud & integrations: event-driven services on Cloud Functions, Pub/Sub, Cloud Run, Secret Manager, and Elasticsearch; REST APIs, webhook receivers, downstream consumers.
 - Platform & migrations: WooCommerce order/subscription migration, Stripe billing handovers, historical backfills, active-order linking.
-- Mobile & backend product: React Native and Node.js — subscriptions, reminders, push registration, tenant branding, CI/CD and release discipline.
+- Mobile & backend product: React Native and Node.js for subscriptions, reminders, push registration, tenant branding, CI/CD, and release discipline.
 - Technical leadership: leading delivery across backend, frontend, mobile, DevOps, QA, and product.
 
 ## Pages
-- [Home / Profile](${url('/')}): Full profile — experience, selected impact, expertise, side projects, and contact.
+- [Home / Profile](${url('/')}): Full profile with experience, selected impact, expertise, side projects, and contact.
 - [Blog](${url('/blog/')}): Writing on cloud architecture, backend systems, migrations, and reliable healthcare software.
 
 ## Blog posts
