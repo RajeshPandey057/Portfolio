@@ -46,6 +46,10 @@
   - Rationale: developer portfolios benefit from memorable craft, but the primary path must remain fast, semantic, and accessible.
   - Implementation: a keyboard-accessible command palette and a Konami-code debug mode. Both are progressively enhanced and honor reduced-motion styling.
   - Status: implemented.
+- Decision: evolve the developer-portfolio system through orientation and motion rather than adding landing-page sections.
+  - Rationale: the existing content hierarchy already communicates senior engineering evidence. The highest-value polish is helping readers keep their place and making existing interactions feel intentional.
+  - Implementation: section-aware sticky navigation with `aria-current`, a staged hero introduction, unified motion tokens, command-palette entry and exit transitions, and consistent hover, focus, and pressed feedback.
+  - Status: implemented.
 - Decision: give light and dark modes distinct but complementary color identities.
   - Rationale: cobalt with cool mineral neutrals communicates clinical trust and technical precision more clearly than warm cream, cold monochrome, or wellness-adjacent forest. The warm terracotta dark theme remains the stronger low-light expression.
   - Implementation: light mode uses cobalt accents over blue-gray surfaces; dark mode retains its existing charcoal and terracotta tokens.
@@ -68,6 +72,10 @@
 - Removed the ignored global meta-keywords output and inaccurate global sitemap freshness fields.
 - Recalibrated light mode to a cool cobalt and mineral-white palette, while preserving the warm terracotta dark theme.
 - Simplified the homepage hero to two distinct actions: selected work and résumé. GitHub remains available in the global navigation.
+- Added active-section feedback to the desktop portfolio index so long-form scanning keeps a clear sense of location.
+- Refined the motion system with a restrained hero sequence, faster section reveals, tactile project and writing states, and a smoothly animated command palette.
+- Raised visible navigation and standalone action targets to a 44px minimum and increased dark-surface muted-text contrast above the WCAG AA threshold.
+- Replaced the blog blockquote's heavy side accent with a quieter editorial rule treatment.
 - Verified a production build, built redirect artifact, generated sitemap, canonical metadata, responsive image output, mobile overflow, heading structure, image alt text, and article table-of-contents links.
 
 ## Important Discoveries
@@ -77,6 +85,8 @@
 - The previous blog inherited generic Bear/Astro styling and conflicted with the homepage theme.
 - Both posts had no hero image, so article listings and social metadata fell back to generic branding.
 - Astro's font and image pipeline requires local network access during builds in the restricted development environment.
+- Explicit font preloads produced unused-resource warnings in Firefox even though the same self-hosted faces were declared and applied. The preload hints were removed; Astro still emits the font-face declarations and optimized fallbacks.
+- The homepage did not need another visual concept or content section. Responsive review showed that section orientation, motion timing, and undersized text-link targets were the remaining high-value design gaps.
 - `public/_redirects` continues to be copied unchanged to `dist/_redirects`.
 
 ## Technical Debt
@@ -105,8 +115,8 @@
 
 ## Handoff Notes
 
-- Current objective: maintain and extend the personal developer portfolio and editorial engineering blog.
-- Current status: implementation, production build, responsive browser review, interaction testing, and static checks are complete. No production deployment was performed.
+- Current objective: maintain and extend the personal developer portfolio and editorial engineering blog without diluting its developer-first character.
+- Current status: the orientation, motion, interaction, touch-target, contrast, and editorial-quote polish pass is implemented. Production build, four responsive breakpoints, command-palette focus, section tracking, overflow, and static checks are complete. No production deployment was performed.
 - Blockers: none.
 - Next steps:
   1. Deploy through the existing hosting workflow.

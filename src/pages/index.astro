@@ -28,7 +28,6 @@ const readingMinutes = (body: string) => Math.max(1, Math.ceil(body.trim().split
 			title={homeTitle}
 			description={SITE_DESCRIPTION}
 			type="profile"
-			preloadFonts={['--font-display', '--font-atkinson']}
 			schema={schema}
 		/>
 	</head>
@@ -36,7 +35,7 @@ const readingMinutes = (body: string) => Math.max(1, Math.ceil(body.trim().split
 		<Header />
 		<main id="main-content" class="portfolio-home">
 			<section class="shell portfolio-hero">
-				<div class="portfolio-intro" data-reveal>
+				<div class="portfolio-intro" data-reveal data-reveal-sequence>
 					<p class="hero-kicker">Rajesh Pandey <span>Lead Technical Engineer</span></p>
 					<h1>Hi, I’m Rajesh.</h1>
 					<p class="hero-deck">
@@ -84,13 +83,13 @@ const readingMinutes = (body: string) => Math.max(1, Math.ceil(body.trim().split
 			<div class="shell portfolio-layout">
 				<aside class="portfolio-index" aria-label="Page sections">
 					<p>On this page</p>
-					<nav>
-						<a href="#work">Selected work</a>
-						<a href="#experience">Experience</a>
-						<a href="#focus">Engineering focus</a>
-						<a href="#projects">Side projects</a>
-						<a href="#writing">Writing</a>
-						<a href="#about">About</a>
+					<nav data-section-nav>
+						<a href="#work" data-section-link>Selected work</a>
+						<a href="#experience" data-section-link>Experience</a>
+						<a href="#focus" data-section-link>Engineering focus</a>
+						<a href="#projects" data-section-link>Side projects</a>
+						<a href="#writing" data-section-link>Writing</a>
+						<a href="#about" data-section-link>About</a>
 					</nav>
 					<button class="index-command" type="button" data-command-open>
 						Quick jump <kbd>⌘ K</kbd>
@@ -434,10 +433,12 @@ const readingMinutes = (body: string) => Math.max(1, Math.ceil(body.trim().split
 		<Footer />
 		<script>
 			const revealItems = document.querySelectorAll('[data-reveal]');
+			const primaryReveal = document.querySelector('[data-reveal-sequence]');
 			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 			if (!reduceMotion && 'IntersectionObserver' in window) {
 				revealItems.forEach((item) => item.classList.add('reveal-ready'));
+				window.requestAnimationFrame(() => primaryReveal?.classList.add('is-visible'));
 				const observer = new IntersectionObserver(
 					(entries) => {
 						entries.forEach((entry) => {
@@ -449,7 +450,45 @@ const readingMinutes = (body: string) => Math.max(1, Math.ceil(body.trim().split
 					},
 					{ threshold: 0.12 },
 				);
-				revealItems.forEach((item) => observer.observe(item));
+				revealItems.forEach((item) => {
+					if (item !== primaryReveal) observer.observe(item);
+				});
+			}
+
+			const sectionLinks = Array.from(
+				document.querySelectorAll<HTMLAnchorElement>('[data-section-link]'),
+			);
+			const sections = sectionLinks
+				.map((link) => {
+					const id = link.hash.slice(1);
+					const section = document.getElementById(id);
+					return section ? { id, link, section } : null;
+				})
+				.filter((item): item is NonNullable<typeof item> => item !== null);
+
+			const setCurrentSection = (id: string) => {
+				sections.forEach((item) => {
+					if (item.id === id) {
+						item.link.setAttribute('aria-current', 'location');
+					} else {
+						item.link.removeAttribute('aria-current');
+					}
+				});
+			};
+
+			if ('IntersectionObserver' in window && sections.length > 0) {
+				const sectionObserver = new IntersectionObserver(
+					(entries) => {
+						const current = entries
+							.filter((entry) => entry.isIntersecting)
+							.sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top))[0];
+
+						if (current?.target.id) setCurrentSection(current.target.id);
+					},
+					{ rootMargin: '-18% 0px -68% 0px', threshold: 0 },
+				);
+
+				sections.forEach(({ section }) => sectionObserver.observe(section));
 			}
 		</script>
 	</body>
