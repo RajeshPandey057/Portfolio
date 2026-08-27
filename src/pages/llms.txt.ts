@@ -25,7 +25,7 @@ export const GET: APIRoute = async (context) => {
 
 > Lead Technical Engineer building cloud architecture, backend services, and the mobile apps behind healthcare platforms. Based in ${AUTHOR.location.locality}, ${AUTHOR.location.region}, ${AUTHOR.location.country}.
 
-${AUTHOR.name} leads technical delivery across ${ORG.name}'s healthcare products, including cloud integration services, patient platforms, and mobile applications. He co-founded Medsi and led its backend, API, and mobile infrastructure through more than 250,000 downloads, over 5,000 consultations, and its 2024 acquisition by HelloWellness. He later served as Lead Software Engineer and Architect at HelloWellness before it merged into ${ORG.name}. Earlier, he built enterprise systems at Tata Consultancy Services.
+${AUTHOR.name} leads technical delivery across ${ORG.name}'s healthcare products, including cloud integration services, patient platforms, and mobile applications. He built Medsi as a side project alongside a full-time role at Tata Consultancy Services, leading its backend, API, and mobile infrastructure through more than 250,000 downloads, over 5,000 consultations, and its 2024 acquisition by HelloWellness. He later served as Lead Software Engineer and Architect at HelloWellness before it merged into ${ORG.name}. Earlier, he built enterprise systems at Tata Consultancy Services.
 
 He works across backend, frontend, mobile, DevOps, and product, with a focus on migrations, data backfills, billing handovers, integrations, and production reliability. He also builds developer and AI tooling.
 

@@ -3,7 +3,7 @@ title: 'Building a telehealth startup: 5 engineering lessons from Medsi'
 seoTitle: 'Building a telehealth startup: 5 lessons from Medsi'
 description: 'What 250,000+ downloads, 5,000+ consultations, and a 2024 acquisition taught me about reliability, integrations, small-team architecture, and technical diligence.'
 pubDate: 'Jul 5 2026'
-updatedDate: 'Jul 30 2026'
+updatedDate: 'Aug 27 2026'
 heroImage: '../../assets/telehealth-startup-cover.png'
 heroImageAlt: 'A modular healthcare network connected to a central coral system'
 tags: ['healthcare', 'startups', 'engineering-leadership']
@@ -13,7 +13,7 @@ takeaways:
   - 'Simple, legible systems help small teams move quickly and hold up during acquisition diligence.'
 ---
 
-In 2022 I co-founded Medsi, a telehealth platform for India. By the time HelloWellness acquired it in 2024, we had crossed 250,000 app downloads and facilitated over 5,000 consultations. I led all of the backend, API, and mobile infrastructure, usually as the only person responsible for whether the system stayed up.
+In 2022 I started building Medsi, a telehealth platform for India, as a side project alongside my full-time engineering role at TCS. By the time HelloWellness acquired it in 2024, we had crossed 250,000 app downloads and facilitated over 5,000 consultations. I led all of the backend, API, and mobile infrastructure, usually as the only person responsible for whether the system stayed up.
 
 Here's what that experience actually taught me, none of which I could have learned at a big company.
 
