@@ -54,6 +54,10 @@
   - Rationale: cobalt with cool mineral neutrals communicates clinical trust and technical precision more clearly than warm cream, cold monochrome, or wellness-adjacent forest. The warm terracotta dark theme remains the stronger low-light expression.
   - Implementation: light mode uses cobalt accents over blue-gray surfaces; dark mode retains its existing charcoal and terracotta tokens.
   - Status: implemented.
+- Decision: describe Medsi as a side project built alongside full-time employment at TCS, with Rajesh's role titled Founding Engineer.
+  - Rationale: this preserves the acquisition and engineering outcomes without implying overlapping full-time employment or an inaccurate co-founder title.
+  - Implementation: the homepage and résumé use the Founding Engineer title; the homepage, Medsi article, and `llms.txt` use the clarified side-project chronology.
+  - Status: implemented.
 
 ## Current Tasks
 
@@ -62,13 +66,14 @@
 ## Completed Work
 
 - Reframed the homepage around Rajesh as an engineer: personal introduction, selected engineering work, ownership and decision evidence, experience, technical focus, side projects, writing, about, and contact.
+- Aligned career and project claims across the homepage, articles, discovery copy, and résumé: Medsi's side-project chronology and Founding Engineer title, five-plus years of professional shipping, the formal TCS Developer title, the billing migration boundary, integration count, and campus leadership scale.
+- Added OrderHive to side projects as a shipped SvelteKit/Firebase/DocuSign sales-operations platform and refreshed the résumé.
 - Added functional keyboard navigation through `Cmd/Ctrl+K`, command filtering, direct résumé/GitHub/contact actions, and a hidden debug-mode easter egg.
 - Replaced the nested desktop scroller, rotating title, count-up metrics, aurora, animated grid, glowing status dot, and spinning border treatment with normal document flow and restrained motion.
 - Unified navigation and footer behavior across every route, including a skip link, visible focus states, mobile navigation, and current-page semantics.
 - Rebuilt the blog index with a clear editorial hierarchy, featured article, topics, reading time, RSS discovery, and semantic article headings.
 - Rebuilt article pages with a visible deck, responsive hero art, key takeaways, table of contents, readable typography, author context, related reading, and internal links.
 - Added concise search titles, updated descriptions, article update dates, topic-specific cover art, descriptive alt text, and three structured-data image aspect ratios per post.
-- Updated visible content and discovery copy to keep the Medsi founder role, acquisition story, and measurable outcomes consistent.
 - Removed the ignored global meta-keywords output and inaccurate global sitemap freshness fields.
 - Recalibrated light mode to a cool cobalt and mineral-white palette, while preserving the warm terracotta dark theme.
 - Simplified the homepage hero to two distinct actions: selected work and résumé. GitHub remains available in the global navigation.
@@ -80,7 +85,7 @@
 
 ## Important Discoveries
 
-- The portfolio already contained strong evidence: 250,000+ Medsi downloads, 5,000+ consultations, a 2024 acquisition, a live WooCommerce-to-Stripe migration, and 7+ production integrations. The main issue was prioritization, not a lack of credible material.
+- The portfolio already contained strong evidence: 250,000+ Medsi downloads, 5,000+ consultations, a 2024 acquisition, a WooCommerce order migration plus Stripe subscription handover, and 7+ production integrations. The main issue was prioritization, not a lack of credible material.
 - Outcome-led hero copy, oversized case imagery, capability cards, and repeated conversion CTAs made the first redesign feel like a product or agency site. Developer identity is clearer when the page leads with the person and makes each claim resolve into role, system, decision, and result.
 - The previous blog inherited generic Bear/Astro styling and conflicted with the homepage theme.
 - Both posts had no hero image, so article listings and social metadata fell back to generic branding.
@@ -88,6 +93,8 @@
 - Explicit font preloads produced unused-resource warnings in Firefox even though the same self-hosted faces were declared and applied. The preload hints were removed; Astro still emits the font-face declarations and optimized fallbacks.
 - The homepage did not need another visual concept or content section. Responsive review showed that section orientation, motion timing, and undersized text-link targets were the remaining high-value design gaps.
 - `public/_redirects` continues to be copied unchanged to `dist/_redirects`.
+- Full-time employment chronology is non-overlapping. Medsi was a side project during the TCS period and its transition overlapped the first three months of the post-acquisition HelloWellness role; Allia Health Group followed HelloWellness.
+- Before this context refresh, the repository was clean on `main`; local `HEAD` and `origin/main` were both `7b95f1b` as of 2026-09-02.
 
 ## Technical Debt
 
@@ -95,6 +102,7 @@
 - Tag archive or search routes are intentionally deferred until the article library is large enough to justify them.
 - The existing posts can grow into deeper case studies with architecture diagrams, anonymized failure examples, reconciliation details, and primary-source references.
 - The README still contains the original Astro starter content and should be rewritten as project-specific documentation.
+- Playwright is installed, but the repository has no test, type-check, or lint scripts and no tracked automated tests.
 
 ## Open Questions
 
@@ -112,11 +120,12 @@
 - Regenerate portrait-derived brand and SEO assets with `node scripts/generate-assets.mjs`; do not hand-edit generated raster assets.
 - Exclude draft blog posts from builds, listings, sitemap, RSS, and `llms.txt`.
 - Keep structured data aligned with visible claims.
+- Keep role titles, employment chronology, résumé content, article copy, and `llms.txt` synchronized when career facts change.
 
 ## Handoff Notes
 
 - Current objective: maintain and extend the personal developer portfolio and editorial engineering blog without diluting its developer-first character.
-- Current status: the orientation, motion, interaction, touch-target, contrast, and editorial-quote polish pass is implemented. Production build, four responsive breakpoints, command-palette focus, section tracking, overflow, and static checks are complete. No production deployment was performed.
+- Current status: the portfolio polish and content-consistency fixes are committed and pushed to `main`. Career tenure, role titles, chronology, billing architecture, integration count, and leadership metrics now align with `public/resume.pdf`. A fresh production build passed on 2026-09-02. No production deployment has been verified from this repository session.
 - Blockers: none.
 - Next steps:
   1. Deploy through the existing hosting workflow.
@@ -124,5 +133,5 @@
   3. Submit or refresh the sitemap in Google Search Console and Bing Webmaster Tools.
   4. Monitor Core Web Vitals, search queries, generative-search visibility, and contact conversions.
   5. Publish additional evidence-rich articles in the four established topic clusters.
-- Relevant files: `src/pages/index.astro`, `src/pages/blog/index.astro`, `src/layouts/BlogPost.astro`, `src/styles/global.css`, `src/content/blog/`, `src/components/BaseHead.astro`, `src/lib/seo.ts`, `src/pages/llms.txt.ts`, `public/robots.txt`.
+- Relevant files: `src/pages/index.astro`, `src/pages/blog/index.astro`, `src/layouts/BlogPost.astro`, `src/styles/global.css`, `src/content/blog/`, `src/components/BaseHead.astro`, `src/lib/seo.ts`, `src/pages/llms.txt.ts`, `public/robots.txt`, `public/resume.pdf`.
 - Useful commands: `./node_modules/.bin/astro dev --background`, `bun run build`, `node scripts/generate-assets.mjs`, and `git diff --check`.
